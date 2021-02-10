@@ -24,10 +24,6 @@ public class WorkoutServiceImpl implements WorkoutService {
 		return wr.findById(id).get();
 	}
 
-	@Override
-	public Workout getWorkout(String name) {
-		return wr.findWorkoutByName(name);
-	}
 
 	@Override
 	public List<Workout> getAllWorkouts() {

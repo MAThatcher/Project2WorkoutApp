@@ -1,11 +1,16 @@
 package com.revature.beans;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="WORKOUT")
 public class Workout {
 	
 	@Id
@@ -19,7 +24,9 @@ public class Workout {
 	private String workout_muscle_group;
 	private int workout_calories;
 	
-	private int user_id;
+	//adding FK constraint on user_id?
+	@JoinColumn(name="user_id")
+	private User user;
 	
 	//no-args constructor
 	public Workout() {

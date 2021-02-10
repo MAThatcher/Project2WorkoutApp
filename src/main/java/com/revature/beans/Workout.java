@@ -10,6 +10,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+/**
+ * @author reu60
+ *
+ */
 @Entity
 @Table(name="WORKOUT")
 public class Workout {
@@ -40,28 +44,30 @@ public class Workout {
 	public Workout() {
 		super();
 	}
+	
+	public Workout() {
+		super();
+	}
 
-	//full-args constructor
 	public Workout(int workout_id, String workout_name, int workout_duration, String workout_muscle_group,
-			int workout_calories, int user_id) {
+			int workout_calories, User user) {
 		super();
 		this.workout_id = workout_id;
 		this.workout_name = workout_name;
 		this.workout_duration = workout_duration;
 		this.workout_muscle_group = workout_muscle_group;
 		this.workout_calories = workout_calories;
-		this.user_id = user_id;
+		this.user = user;
 	}
 
-	//id-less constructor
 	public Workout(String workout_name, int workout_duration, String workout_muscle_group, int workout_calories,
-			int user_id) {
+			User user) {
 		super();
 		this.workout_name = workout_name;
 		this.workout_duration = workout_duration;
 		this.workout_muscle_group = workout_muscle_group;
 		this.workout_calories = workout_calories;
-		this.user_id = user_id;
+		this.user = user;
 	}
 
 	public int getWorkout_id() {
@@ -104,20 +110,26 @@ public class Workout {
 		this.workout_calories = workout_calories;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
 	public String toString() {
 		return "Workout [workout_id=" + workout_id + ", workout_name=" + workout_name + ", workout_duration="
 				+ workout_duration + ", workout_muscle_group=" + workout_muscle_group + ", workout_calories="
-				+ workout_calories + ", user_id=" + user_id + "]";
+				+ workout_calories + "]";
 	}
+	
+	
+	
+	
+
+	
 	
 	
 	

@@ -3,6 +3,7 @@ package com.revature.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,14 +12,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.revature.beans.Actor;
 import com.revature.beans.User;
+import com.revature.services.UserService;
 import com.revature.services.UserServiceImpl;
 
+@Controller
 public class UserController {
 	
 	@Autowired
-	UserServiceImpl us;
+	UserService us;
 	
 	@GetMapping(value = "/users/{id}")
 	public User getUser(@PathVariable("id") String id) {
@@ -32,7 +34,7 @@ public class UserController {
 	}
 	
 	@GetMapping(value = "/users/search")
-	public List<User> getUserByUsername(@RequestParam(required = true) String username) {
+	public User getUserByUsername(@RequestParam(required = true) String username) {
 		return us.findUserByUsername(username);
 	}
 	
@@ -43,7 +45,7 @@ public class UserController {
 		//String password = user.getPassword();
 		
 		//return us.login(username, password);
-		return us.findUserByUsername(username).get(0);
+		return us.findUserByUsername(username);
 	}
 	
 	//For adding/registering a new user; can change name to "registerUser" if desired

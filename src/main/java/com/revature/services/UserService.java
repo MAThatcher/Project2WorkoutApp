@@ -11,7 +11,7 @@ public interface UserService {
 	//public User getUser(int id); //Alternate name
 	public User findUserByID(int id);
 	//public User getUser(String username); //Alternate name
-	public List<User> findUserByUsername(String username);
+	public User findUserByUsername(String username);
 	public List<User> getAllUsers();
 	public User updateUser(User change);
 	public boolean deleteUser(int id);

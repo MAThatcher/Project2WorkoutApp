@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> findUserByUsername(String username) { //Custom Method, may need to check if naming is correct
+	public User findUserByUsername(String username) { //Custom Method, may need to check if naming is correct
 		return ur.findByUsername(username);
 	}
 

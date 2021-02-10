@@ -13,24 +13,24 @@ import javax.persistence.Table;
 public class ExerciseReference {
 
 	@Id
-	@Column(updatable = false, name = "ex id")
+	@Column(updatable = false, name = "ex_id")
 	@SequenceGenerator(name = "EXERCISE_REFERENCE_SEQ", sequenceName = "EXERCISE_REFERENCE_SEQ", allocationSize = 1)
 	@GeneratedValue(generator = "EXERCISE_REFERENCE_SEQ", strategy = GenerationType.SEQUENCE)
 	private int id = 0;
 
-	@Column(name = "ex type")
+	@Column(name = "ex_type")
 	private String type;
 
-	@Column(name = "ex name")
+	@Column(name = "ex_name")
 	private String name;
 
-	@Column(name = "ex muscle group")
+	@Column(name = "ex_muscle_group")
 	private String mGroup;
 
-	@Column(name = "ex difficulty")
+	@Column(name = "ex_difficulty")
 	private String difficulty;
 
-	@Column(name = "ex calories")
+	@Column(name = "ex_calories")
 	private int calories;
 
 	@Column(name = "unit")

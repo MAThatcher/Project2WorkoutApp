@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Sets;
 import com.revature.services.SetsServiceImpl;
 
+@RestController
 public class SetsControllerImpl implements SetsController{
 
 	@Autowired

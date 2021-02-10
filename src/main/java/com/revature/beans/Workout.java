@@ -6,14 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="WORKOUT")
 public class Workout {
-	
-	//Test Comment --append
 
 	@Id
 	@Column(updatable=false)
@@ -21,13 +20,20 @@ public class Workout {
 	@GeneratedValue(generator="WORKOUT_SEQ", strategy=GenerationType.SEQUENCE)
 	private int workout_id;
 	
+	@Column(name = "WORKOUT_NAME")
 	private String workout_name;
+	
+	@Column(name = "WORKOUT_DURATION")
 	private int workout_duration;
+	
+	@Column(name = "WORKOUT_MUSCLE_GROUP")
 	private String workout_muscle_group;
+	
+	@Column(name = "WORKOUT_CALORIES")
 	private int workout_calories;
 	
-	//adding FK constraint on user_id?
-	@JoinColumn(name="user_id")
+	@ManyToOne
+	@JoinColumn(name="USER_ID")
 	private User user;
 	
 	//no-args constructor

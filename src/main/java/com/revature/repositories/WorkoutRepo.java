@@ -8,6 +8,6 @@ import com.revature.beans.Workout;
 @Repository
 public interface WorkoutRepo extends CrudRepository<Workout, Integer> {
 
-	Workout findWorkoutByName(String workout_name);
+	Workout findByName(String name);
 
 }

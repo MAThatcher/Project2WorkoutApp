@@ -49,7 +49,7 @@ public class UserController {
 	}
 	
 	//For adding/registering a new user; can change name to "registerUser" if desired
-	@PostMapping(value = "/users/register", consumes = "application/json", produces = "application/json")
+	@PostMapping(value = "/users", consumes = "application/json", produces = "application/json")
 	public User addUser(@RequestBody User user) {
 		return us.addUser(user);
 	}

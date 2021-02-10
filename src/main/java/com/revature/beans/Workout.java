@@ -20,7 +20,7 @@ public class Workout {
 	@GeneratedValue(generator="WORKOUT_SEQ", strategy=GenerationType.SEQUENCE)
 	private int workout_id;
 	
-	@Column(name = "WORKOUT_NAME")
+	@Column(name = "WORKOUT_NAME", unique = true)
 	private String workout_name;
 	
 	@Column(name = "WORKOUT_DURATION")

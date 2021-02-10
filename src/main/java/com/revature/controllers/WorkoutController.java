@@ -33,7 +33,7 @@ public class WorkoutController {
 	}
 	
 	@GetMapping(value="/workouts/search")
-	public List<Workout> getWorkoutByName(@RequestParam(required=true) String name) {
+	public Workout getWorkoutByName(@RequestParam(required=true) String name) {
 		return ws.getWorkout(name);
 	}
 	

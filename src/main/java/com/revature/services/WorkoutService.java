@@ -8,7 +8,7 @@ public interface WorkoutService {
 
 	public Workout addWorkout(Workout w);
 	public Workout getWorkout(int id);
-	public List<Workout> getWorkout(String name);
+	public Workout getWorkout(String name);
 	public List<Workout> getAllWorkouts();
 	public Workout updateWorkout(Workout change);
 	public boolean deleteWorkout(int id);

@@ -18,28 +18,28 @@ import com.revature.services.ExerciseReferenceService;
 public class ExerciseReferenceControllerImpl implements ExerciseReferenceController {
 	@Autowired
 	ExerciseReferenceService ers;
-	
-	@GetMapping(value="/exerciseReference/{id}")
+
+	@GetMapping(value = "/exerciseReference/{id}")
 	public ExerciseReference getExerciseReference(@PathVariable("id") int id) {
 		return ers.getExerciseReference(id);
 	}
-	
+
 	@GetMapping(value = "/exerciseReference", produces = "application/json")
 	public List<ExerciseReference> getAllExerciseReferences() {
 		return ers.getAllExerciseReferences();
 	}
-	
+
 	@PostMapping(value = "/exerciseReference", consumes = "application/json", produces = "application/json")
 	public ExerciseReference addExerciseReference(@RequestBody ExerciseReference er) {
 		return ers.addExerciseReference(er);
 	}
-	
+
 	@PutMapping(value = "/exerciseReference/{id}", consumes = "application/json")
 	public ExerciseReference updateExerciseReference(@PathVariable("id") int id, @RequestBody ExerciseReference er) {
 		er.setId(id);
 		return ers.updateExerciseReference(er);
 	}
-	
+
 	@DeleteMapping(value = "/exerciseReference/{id}")
 	public boolean deleteExerciseReference(@PathVariable("id") int id) {
 		return ers.deleteExerciseReference(id);

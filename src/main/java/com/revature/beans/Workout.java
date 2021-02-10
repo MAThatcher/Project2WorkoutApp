@@ -21,16 +21,16 @@ public class Workout {
 	private int workout_id;
 
 	@Column(name = "WORKOUT_NAME", unique = true)
-	private String workout_name;
+	private String name;
 
 	@Column(name = "WORKOUT_DURATION")
-	private int workout_duration;
+	private int duration;
 
 	@Column(name = "WORKOUT_MUSCLE_GROUP")
-	private String workout_muscle_group;
+	private String mGroup;
 
 	@Column(name = "WORKOUT_CALORIES")
-	private int workout_calories;
+	private int calories;
 
 	@ManyToOne
 	@JoinColumn(name = "USER_ID")
@@ -41,14 +41,13 @@ public class Workout {
 		super();
 	}
 
-	public Workout(int workout_id, String workout_name, int workout_duration, String workout_muscle_group,
-			int workout_calories, User user) {
+	public Workout(int workout_id, String name, int duration, String mGroup, int calories, User user) {
 		super();
 		this.workout_id = workout_id;
-		this.workout_name = workout_name;
-		this.workout_duration = workout_duration;
-		this.workout_muscle_group = workout_muscle_group;
-		this.workout_calories = workout_calories;
+		this.name = name;
+		this.duration = duration;
+		this.mGroup = mGroup;
+		this.calories = calories;
 		this.user = user;
 	}
 
@@ -60,36 +59,36 @@ public class Workout {
 		this.workout_id = workout_id;
 	}
 
-	public String getWorkout_name() {
-		return workout_name;
+	public String getName() {
+		return name;
 	}
 
-	public void setWorkout_name(String workout_name) {
-		this.workout_name = workout_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public int getWorkout_duration() {
-		return workout_duration;
+	public int getDuration() {
+		return duration;
 	}
 
-	public void setWorkout_duration(int workout_duration) {
-		this.workout_duration = workout_duration;
+	public void setDuration(int duration) {
+		this.duration = duration;
 	}
 
-	public String getWorkout_muscle_group() {
-		return workout_muscle_group;
+	public String getmGroup() {
+		return mGroup;
 	}
 
-	public void setWorkout_muscle_group(String workout_muscle_group) {
-		this.workout_muscle_group = workout_muscle_group;
+	public void setmGroup(String mGroup) {
+		this.mGroup = mGroup;
 	}
 
-	public int getWorkout_calories() {
-		return workout_calories;
+	public int getCalories() {
+		return calories;
 	}
 
-	public void setWorkout_calories(int workout_calories) {
-		this.workout_calories = workout_calories;
+	public void setCalories(int calories) {
+		this.calories = calories;
 	}
 
 	public User getUser() {
@@ -102,9 +101,8 @@ public class Workout {
 
 	@Override
 	public String toString() {
-		return "Workout [workout_id=" + workout_id + ", workout_name=" + workout_name + ", workout_duration="
-				+ workout_duration + ", workout_muscle_group=" + workout_muscle_group + ", workout_calories="
-				+ workout_calories + ", user=" + user + "]";
+		return "Workout [workout_id=" + workout_id + ", name=" + name + ", duration=" + duration + ", mGroup=" + mGroup
+				+ ", calories=" + calories + ", user=" + user + "]";
 	}
 
 }

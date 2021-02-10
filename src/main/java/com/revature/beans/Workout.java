@@ -13,6 +13,8 @@ import javax.persistence.Table;
 @Table(name="WORKOUT")
 public class Workout {
 	
+	//Test Comment --append
+
 	@Id
 	@Column(updatable=false)
 	@SequenceGenerator(name="WORKOUT_SEQ", sequenceName="WORKOUT_SEQ", allocationSize=1)

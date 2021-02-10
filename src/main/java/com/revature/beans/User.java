@@ -17,8 +17,8 @@ public class User {
 	@Id //PK
 	//@Column(name = "user_id") //Names must match db
 	@Column(updatable = false, name = "user_id") //Cannot change PK
-	@SequenceGenerator(name = "USER_SEQ", sequenceName = "USER_SEQ", allocationSize = 1) 
-	@GeneratedValue(generator = "USER_SEQ", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "USERS_SEQ", sequenceName = "USERS_SEQ", allocationSize = 1) 
+	@GeneratedValue(generator = "USERS_SEQ", strategy = GenerationType.SEQUENCE)
 	private int userID; //PK NUM
 	
 	@Column(name = "user_fname")

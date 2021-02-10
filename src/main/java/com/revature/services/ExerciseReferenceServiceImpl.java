@@ -16,28 +16,33 @@ public class ExerciseReferenceServiceImpl implements ExerciseReferenceService{
 
 	@Override
 	public ExerciseReference addExerciseReference(ExerciseReference er) {
-		er.setId(err.addExerciseReference(er));
-		return er;
+		return err.save(er);
 	}
 
 	@Override
 	public ExerciseReference getExerciseReference(int id) {
-		return err.getExerciseReference(id);
+		return err.findById(id).get();
 	}
 
 	@Override
 	public List<ExerciseReference> getAllExerciseReferences() {
-		return err.getAllExerciseReferences();
+		return (List<ExerciseReference>) err.findAll();
 	}
 
 	@Override
 	public ExerciseReference updateExerciseReference(ExerciseReference er) {
-		return err.updateExerciseReference(er);
+		return err.save(er);
 	}
 
 	@Override
 	public boolean deleteExerciseReference(int id) {
-		return err.deleteExerciseReference(id);
+		try {
+			err.delete(err.findById(id).get());
+			return true;
+		}catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 }

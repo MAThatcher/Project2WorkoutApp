@@ -11,57 +11,45 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="WORKOUT")
+@Table(name = "WORKOUT")
 public class Workout {
 
 	@Id
-	@Column(updatable=false)
-	@SequenceGenerator(name="WORKOUT_SEQ", sequenceName="WORKOUT_SEQ", allocationSize=1)
-	@GeneratedValue(generator="WORKOUT_SEQ", strategy=GenerationType.SEQUENCE)
+	@Column(updatable = false)
+	@SequenceGenerator(name = "WORKOUT_SEQ", sequenceName = "WORKOUT_SEQ", allocationSize = 1)
+	@GeneratedValue(generator = "WORKOUT_SEQ", strategy = GenerationType.SEQUENCE)
 	private int workout_id;
-	
+
 	@Column(name = "WORKOUT_NAME", unique = true)
 	private String workout_name;
-	
+
 	@Column(name = "WORKOUT_DURATION")
 	private int workout_duration;
-	
+
 	@Column(name = "WORKOUT_MUSCLE_GROUP")
 	private String workout_muscle_group;
-	
+
 	@Column(name = "WORKOUT_CALORIES")
 	private int workout_calories;
-	
+
 	@ManyToOne
-	@JoinColumn(name="USER_ID")
+	@JoinColumn(name = "USER_ID")
 	private User user;
-	
-	//no-args constructor
+
+	// no-args constructor
 	public Workout() {
 		super();
 	}
 
-	//full-args constructor
 	public Workout(int workout_id, String workout_name, int workout_duration, String workout_muscle_group,
-			int workout_calories, int user_id) {
+			int workout_calories, User user) {
 		super();
 		this.workout_id = workout_id;
 		this.workout_name = workout_name;
 		this.workout_duration = workout_duration;
 		this.workout_muscle_group = workout_muscle_group;
 		this.workout_calories = workout_calories;
-		this.user_id = user_id;
-	}
-
-	//id-less constructor
-	public Workout(String workout_name, int workout_duration, String workout_muscle_group, int workout_calories,
-			int user_id) {
-		super();
-		this.workout_name = workout_name;
-		this.workout_duration = workout_duration;
-		this.workout_muscle_group = workout_muscle_group;
-		this.workout_calories = workout_calories;
-		this.user_id = user_id;
+		this.user = user;
 	}
 
 	public int getWorkout_id() {
@@ -104,23 +92,19 @@ public class Workout {
 		this.workout_calories = workout_calories;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
 	public String toString() {
 		return "Workout [workout_id=" + workout_id + ", workout_name=" + workout_name + ", workout_duration="
 				+ workout_duration + ", workout_muscle_group=" + workout_muscle_group + ", workout_calories="
-				+ workout_calories + ", user_id=" + user_id + "]";
+				+ workout_calories + ", user=" + user + "]";
 	}
-	
-	
-	
-	
 
 }

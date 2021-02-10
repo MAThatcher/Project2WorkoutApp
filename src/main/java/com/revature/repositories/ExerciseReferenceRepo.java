@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.revature.beans.ExerciseReference;
 
 @Repository
-public interface ExerciseReferenceRepo extends CrudRepository<ExerciseReference, Integer>{
+public interface ExerciseReferenceRepo extends CrudRepository<ExerciseReference, Integer> {
 }

@@ -1,12 +1,13 @@
 package com.revature.repositories;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.revature.beans.Workout;
 
-public interface WorkoutRepo extends CrudRepository<Workout, Integer>{
-	
-	Workout getWorkoutByName(String workout_name);
-	Workout getWorkoutById(int workout_id);
-	
+@Repository
+public interface WorkoutRepo extends CrudRepository<Workout, Integer> {
+
+	Workout findWorkoutByName(String workout_name);
+
 }

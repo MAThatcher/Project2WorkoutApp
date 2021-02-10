@@ -26,7 +26,7 @@ public class WorkoutServiceImpl implements WorkoutService {
 
 	@Override
 	public Workout getWorkout(String name) {
-		return wr.getWorkoutByName(name);
+		return wr.findWorkoutByName(name);
 	}
 
 	@Override

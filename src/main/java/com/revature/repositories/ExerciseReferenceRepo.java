@@ -3,11 +3,8 @@ package com.revature.repositories;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.revature.beans.Workout;
+import com.revature.beans.ExerciseReference;
 
 @Repository
-public interface WorkoutRepo extends CrudRepository<Workout, Integer> {
-
-	Workout findWorkoutByName(String workout_name);
-
+public interface ExerciseReferenceRepo extends CrudRepository<ExerciseReference, Integer> {
 }

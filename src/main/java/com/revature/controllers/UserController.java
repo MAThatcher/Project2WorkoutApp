@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,49 +18,92 @@ import com.revature.services.UserService;
 
 @RestController
 public class UserController {
-	
+
 	@Autowired
 	UserService us;
-	
+
 	@GetMapping(value = "/users/{id}")
 	public User getUser(@PathVariable("id") int id) {
-		return us.findUserByID(id);
+		try {
+			return us.findUserByID(id);
+		} catch (NoSuchElementException e) {
+			System.out.println("NoSuchElementException in UserController.getUser");
+			// e.printStackTrace();
+		}
+		return null;
 	}
-	
+
 	@GetMapping(value = "/users", produces = "application/json")
 	public List<User> getAllUsers() {
-		return us.getAllUsers();
+		try {
+			return us.getAllUsers();
+		} catch (NoSuchElementException e) {
+			System.out.println("NoSuchElementException in UserController.getAllUsers");
+			// e.printStackTrace();
+		}
+		return null;
 	}
-	
+
 	@GetMapping(value = "/users/search")
 	public User getUserByUsername(@RequestParam(required = true) String username) {
-		return us.findUserByUsername(username);
+		try {
+			return us.findUserByUsername(username);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
-	
-	//To work with later for a login method
+
+	// To work with later for a login method
 	@PostMapping(value = "/users/securelogin", consumes = "application/json", produces = "application/json")
 	public User getUser(@RequestBody User user) {
-		String username = user.getUsername();
-		String password = user.getPassword();
-		return us.login(username, password);
+		try {
+			String username = user.getUsername();
+			String password = user.getPassword();
+			return us.login(username, password);
+		} catch (Exception e) {
+			System.out.println("Exception in UserController.getUser login method");
+			e.printStackTrace();
+		}
+		return null;
+
 	}
-	
-	//For adding/registering a new user; can change name to "registerUser" if desired
+
+	// For adding/registering a new user; can change name to "registerUser" if
+	// desired
 	@PostMapping(value = "/users", consumes = "application/json", produces = "application/json")
 	public User addUser(@RequestBody User user) {
-		return us.addUser(user);
+		try {
+			return us.addUser(user);
+		} catch (Exception e) {
+			System.out.println("Exception in UserController.addUser Likely duplicate value in unique column");
+			// e.printStackTrace();
+		}
+		return null;
+
 	}
-	
+
 	@PutMapping(value = "/users/{id}", consumes = "application/json")
 	public User updateActor(@PathVariable("id") int userID, @RequestBody User change) {
-		change.setUserID(userID);
-		return us.updateUser(change);
+		try {
+			change.setUserID(userID);
+			return us.updateUser(change);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
 	}
-	
+
 	@DeleteMapping(value = "/users/{id}")
 	public boolean deleteUser(@PathVariable("id") int id) {
-		System.out.println("Executing Delete");
-		return us.deleteUser(id);
+		try {
+			return us.deleteUser(id);
+		} catch (NoSuchElementException e) {
+			System.out.println("NoSuchElementException in UserController.deleteUser");
+			// e.printStackTrace();
+		}
+		return false;
 	}
 
 }

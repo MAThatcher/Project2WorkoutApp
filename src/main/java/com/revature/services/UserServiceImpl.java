@@ -58,8 +58,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User login(String username, String password) {
-		// TODO Implement once database connection confirmed
-		return null;
+		return ur.findByUsernameAndPassword(username, password);
 	}
 
 	@Override

@@ -10,5 +10,6 @@ import com.revature.beans.User;
 public interface UserRepo extends CrudRepository <User, Integer>{
 	
 	User findByUsername(String username);
+	User findByUsernameAndPassword(String username, String password);
 
 }

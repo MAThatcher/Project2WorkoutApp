@@ -1,8 +1,6 @@
 package com.revature.controllers;
 
 import java.util.List;
-
-
 import com.revature.beans.Sets;
 
 public interface SetsController {

@@ -18,7 +18,7 @@ public interface UserService {
 	//public List<User>findByName(String name); //Alternate name
 	
 	//Non-CRUD
-	public boolean registerUser(User user);	
+	public User registerUser(User user);	
 	public User login(String username, String password);		
 	public User logout(User user);
 

@@ -31,7 +31,7 @@ public class WorkoutController {
 		return ws.getAllWorkouts();
 	}
 	
-	@PostMapping(value = "/workout", consumes="application/json", produces = "applicaion/json")
+	@PostMapping(value = "/workout", consumes="application/json", produces = "application/json")
 	public Workout addWorkout(@RequestBody Workout w) {
 		return ws.addWorkout(w);
 	}

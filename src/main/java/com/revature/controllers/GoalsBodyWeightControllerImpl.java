@@ -14,62 +14,49 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.GoalsBodyWeight;
 import com.revature.services.GoalsBodyWeightService;
-import com.revature.services.GoalsBodyWeightServiceImpl;
 
 @RestController
-public class GoalsBodyWeightControllerImpl implements GoalsBodyWeightController{
+public class GoalsBodyWeightControllerImpl implements GoalsBodyWeightController {
 
 	@Autowired
 	GoalsBodyWeightService gs;
-	
+
 	@GetMapping(value = "/goalsbodyweight/{id}")
 	public GoalsBodyWeight getGoal(@PathVariable("id") int id) {
-		try
-		{
+		try {
 			return gs.getGoal(id);
-		}
-		catch(NoSuchElementException e)
-		{
+		} catch (NoSuchElementException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
 	@GetMapping(value = "/goalsbodyweight", produces = "application/json")
-	public List<GoalsBodyWeight> getAllGoals(){ 
-	try
-	{
-		return gs.getAllGoals();
-	}
-	catch(NoSuchElementException e)
-	{
-		e.printStackTrace();
-		return null;
-	}
+	public List<GoalsBodyWeight> getAllGoals() {
+		try {
+			return gs.getAllGoals();
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@PostMapping(value = "/goalsbodyweight", consumes = "application/json", produces = "application/json")
 	public GoalsBodyWeight addGoal(@RequestBody GoalsBodyWeight goal) {
-		try
-		{
+		try {
 			return gs.addGoal(goal);
-		}
-		catch(NoSuchElementException e)
-		{
+		} catch (NoSuchElementException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
 	@PutMapping(value = "/goalsbodyweight/{id}", consumes = "application/json")
-	public GoalsBodyWeight updateGoal(@PathVariable("id")int id, @RequestBody GoalsBodyWeight goal) {
-		try
-		{
+	public GoalsBodyWeight updateGoal(@PathVariable("id") int id, @RequestBody GoalsBodyWeight goal) {
+		try {
 			goal.setBodyweight_id(id);
 			return gs.updateGoal(goal);
-		}
-		catch(NoSuchElementException e)
-		{
+		} catch (NoSuchElementException e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -77,16 +64,12 @@ public class GoalsBodyWeightControllerImpl implements GoalsBodyWeightController{
 
 	@DeleteMapping(value = "/goalsbodyweight/{id}")
 	public boolean deleteGoal(@PathVariable("id") int id) {
-		try
-		{
+		try {
 			return gs.deleteGoal(id);
-		}
-		catch(NoSuchElementException e)
-		{
+		} catch (NoSuchElementException e) {
 			e.printStackTrace();
 			return false;
 		}
 	}
 
-	
 }

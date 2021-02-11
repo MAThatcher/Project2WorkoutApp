@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Workout;
 import com.revature.services.WorkoutService;
+import com.revature.services.WorkoutServiceImpl;
 
 @RestController
 public class WorkoutController {
 	
 	@Autowired
-	WorkoutService ws;
+	WorkoutServiceImpl ws;
 	
 	@GetMapping(value = "/workout/{id}")
 	public Workout getWorkout(@PathVariable("workout_id") String id) {
@@ -30,11 +31,6 @@ public class WorkoutController {
 	public List<Workout> getAllWorkouts() {
 		System.out.println("Getting all workouts");
 		return ws.getAllWorkouts();
-	}
-	
-	@GetMapping(value="/workouts/search")
-	public Workout getWorkoutByName(@RequestParam(required=true) String name) {
-		return ws.getWorkout(name);
 	}
 	
 	@PostMapping(value = "/workout", consumes="application/json", produces = "applicaion/json")

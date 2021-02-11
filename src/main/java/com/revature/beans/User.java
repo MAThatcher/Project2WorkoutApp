@@ -33,7 +33,7 @@ public class User {
 	@Column(name = "user_password")
 	private String password; //CHAR
 	
-	@Column(name = "user_email")
+	@Column(name = "user_email", unique = true)
 	private String email;	//CHAR
 	
 	@Column(name = "user_phone_number")

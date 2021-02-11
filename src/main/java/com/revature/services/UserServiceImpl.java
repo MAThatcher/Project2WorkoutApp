@@ -51,9 +51,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean registerUser(User user) {
-		// TODO Implement once database connection confirmed
-		return false;
+	public User registerUser(User user) {
+		
+		if(ur.findByUsername(user.getUsername()) == null) {
+			return ur.save(user);
+		} else {
+			System.out.println("Username already taken");
+			return null;
+		}
+		
+		//return ur.save(user);
 	}
 
 	@Override
@@ -63,8 +70,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User logout(User user) {
-		// TODO Implement once database connection confirmed
-		return null;
+		System.out.println("Logging out...");
+		user = null;
+		
+		return user;		
 	}
 
 }

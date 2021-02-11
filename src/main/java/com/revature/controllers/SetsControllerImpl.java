@@ -33,7 +33,7 @@ public class SetsControllerImpl implements SetsController{
 		return ss.getAllSets();
 	}
 	
-	@PostMapping(value = "/actors", consumes = "application/json", produces = "application/json")
+	@PostMapping(value = "/sets", consumes = "application/json", produces = "application/json")
 	public Sets addSet(@RequestBody Sets set)
 	{
 		return ss.addSet(set);

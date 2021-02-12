@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquiry/3.3.1/jquiry.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -13,29 +13,132 @@
 </head>
 <body>
 
-    <!--Nav Bar-->
-    <nav class="navbar navbar-expand-md navbar-light big-light sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a href="" class="nav-link">Home</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                <span class="navbar-toggle-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="" class="nav-link">Information</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link">Edit Account</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link">Logout</a>
-                    </li>
-                </ul>
-            </div>
-    
+          <a class="navbar-brand" href="#">Home</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">   
+            </ul>
+            <form class="d-flex">
+                <a class="navbar-brand" href="#">Information</a>
+                <a class="navbar-brand" href="#">Edit Account</a>
+                <a class="navbar-brand" href="#">Logout</a>
+                
+            </form>
+          </div>
         </div>
-        </nav>
+      </nav>
+
+
+    <!--Welcome Message-->
+    <div class="welcome">
+        <div class="container-fluid padding">
+        <div class="row welcome text-center">
+            <div class="col-12">
+                <h1 class="display-4">Informational Page</h1>
+            </div>
+            <hr>
+            <div class="col-12">
+                <p class="lead">This page should help aid you in your search for the right workout routine. There are also external resources provided for your convenience.</p>
+            </div>
+        </div>
+        </div>
+        </div>
+
+    <div class="training-types">
+        <div class="card text-center">
+            <div class="card-header">
+            Training Type #1
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">Continuous training develops cardiovascular fitness</h5>
+            <p class="card-text">Swimming, running, cycling, walking, or a combination of these disciplines.</p>
+            <a href="#" class="btn btn-primary">Learn more</a>
+            </div>
+        </div>
+        <div class="card text-center">
+            <div class="card-header">
+            Training Type #2
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">Speed Play Training</h5>
+            <p class="card-text">Changes of speed, incline, and terrain are used to provide changes in exercise intensity.
+                Aerobic and anaerobic work can be done in quantities that suit the performer.
+            </p>
+            <a href="#" class="btn btn-primary">Learn more</a>
+            </div>
+        </div>
+        <div class="card text-center">
+            <div class="card-header">
+            Training Type #3
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">Interval training develops strength, speed and muscular endurance</h5>
+            <p class="card-text">Periods of intense work interspersed with timed rest. Structured in reps and sets.</p>
+            <a href="#" class="btn btn-primary">Learn more</a>
+            </div>
+        </div>
+        <div class="card text-center">
+            <div class="card-header">
+            Training Type #4
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">Weight training develops strength</h5>
+            <p class="card-text">Interval form of training. Time is structured in reps and sets with specific timings for recovery between sets.</p>
+            <a href="#" class="btn btn-primary">Learn more</a>
+            </div>
+        </div>
+        <div class="card text-center">
+            <div class="card-header">
+            Training Type #5
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">Plyometric training develops power</h5>
+            <p class="card-text">High intensity exercise invovling explosive movements. Muscle is lengthened and the rapidly shortened to develop the explosive capability of the muscle.</p>
+            <a href="#" class="btn btn-primary">Learn more</a>
+            </div>
+        </div>
+        <div class="card text-center">
+            <div class="card-header">
+            Training Type #6
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">Flexibility training develops flexibility</h5>
+            <p class="card-text">Essential for all athletes in all sports and activities. Time is measured by the length of hold and recovery period between holds.
+                Intensity is measured as a percentage of range of motion.
+            </p>
+            <a href="#" class="btn btn-primary">Learn more</a>
+            </div>
+        </div>
+        <div class="card text-center">
+            <div class="card-header">
+            Training Type #7
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">Circuit training</h5>
+            <p class="card-text">Stations are set out that train one or more components of fitness.
+                The performer moves from one station to the next with exercise periods and rest periods.
+            </p>
+            <a href="#" class="btn btn-primary">Learn more</a>
+            </div>
+        </div>
+        <div class="card text-center">
+            <div class="card-header">
+            Training Type #8
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">Yoga, pilates, body pump, and spinning</h5>
+            <p class="card-text">Very popular exercise formats. Group formats help to motivate participants to work harder.
+                Outstanding for developing core strenght and whole body conditioning.
+            </p>
+            <a href="#" class="btn btn-primary">Learn more</a>
+            </div>
+        </div>
+      </div>
+      
 
     
     

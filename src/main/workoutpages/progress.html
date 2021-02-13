@@ -13,9 +13,110 @@
 </head>
 <body>
 
-    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="http//localhost:8080/Project2WorkoutApp/main.html">Home</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">   
+            </ul>
+            <form class="d-flex">
+                <a class="navbar-brand" href="http://localhost:8080/Project2WorkoutApp/information.html">Information</a>
+                <a class="navbar-brand" href="http://localhost:8080/Project2WorkoutApp/login.html">Logout</a>
+                
+            </form>
+          </div>
+        </div>
+      </nav>
+
+    <!--Welcome Message-->
+    <div class="welcome">
+    <div class="container-fluid padding">
+    <div class="row welcome text-center">
+        <div class="col-12">
+            <h1 class="display-4">User Progress</h1>
+        </div>
+        <hr>
+        <div class="col-12">
+            <p class="lead">On this page you are able to view and update your personal records and your current/goal weight.</p>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <table class="table" id="table">
+        <thead>
+          <tr>
+            <th scope="col">Bodyweight ID</th>
+            <th scope="col">Current Weight</th>
+            <th scope="col">Goal Weight</th>
+            <th scope="col">User ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+
 
     
     
 </body>
+
+<script type="text/javascript">
+
+    const table = document.querySelector("#table > tbody")
+    console.log(table);
+
+    function loadWeight () {
+        const xhttp = new XMLHttpRequest();
+
+        //goals bodyweight link here
+        xhttp.open("GET", `http://localhost:8080/Project2WorkoutApp/goalsbodyweight/${id}`, true);
+
+        xhttp.onload = () => {
+            try {
+                const json = JSON.parse(xhttp.responseText);
+                populateTable();
+            } catch (e) {
+                console.warn("Could not find weights");
+            } 
+        }
+
+        xhttp.send();
+    }
+
+    function populateTable(json) {
+        json.forEach((row) => {
+            const tr = document.createElement("tr");
+
+            row.forEach((cell) => {
+                cosnt td = document.createElement("td");
+                td.textContent = cell;
+                tr.appendChild(td);
+            });
+
+            table.appendChild(tr);
+
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => { loadWeight(); })
+
+
+
+
+</script>
+
 </html>

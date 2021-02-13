@@ -79,6 +79,7 @@
     const table = document.querySelector("#table > tbody")
     console.log(table);
 
+    //grabs the goals_bodyweight information for a specific user
     function loadWeight () {
         const xhttp = new XMLHttpRequest();
 
@@ -97,12 +98,13 @@
         xhttp.send();
     }
 
+    //populates table with loadWeight resposneText
     function populateTable(json) {
         json.forEach((row) => {
             const tr = document.createElement("tr");
 
             row.forEach((cell) => {
-                cosnt td = document.createElement("td");
+                const td = document.createElement("td");
                 td.textContent = cell;
                 tr.appendChild(td);
             });
@@ -113,6 +115,29 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => { loadWeight(); })
+
+    //this is setting the cookie of the employee's id with AJAX GET
+    window.onload = function() { 
+        let email = document.cookie.valueOf;
+
+        let xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+
+                let user = JSON.parse(this.responseText);
+
+                id = user.userId;
+
+                loadWeight();
+            }
+        }
+
+        xhttp.open("GET", "http://localhost:8080/Project2WorkoutApp/users/search", true);
+
+        xhttp.send();
+    }
 
 
 

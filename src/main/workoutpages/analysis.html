@@ -72,8 +72,11 @@
 </body>
 
 <script>
- //grabs the goals_bodyweight information for a specific user
- function loadWeight () {
+
+const table = document.querySelector("#table > tbody")
+
+//grabs the goals_bodyweight information for a specific user
+function loadWeight () {
         const xhttp = new XMLHttpRequest();
 
         //goals bodyweight link here
@@ -91,8 +94,8 @@
         xhttp.send();
     }
 
-    //populates table with loadWeight resposneText
-    function populateTable(json) {
+//populates table with loadWeight resposneText
+function populateTable(json) {
         json.forEach((row) => {
             const tr = document.createElement("tr");
 
@@ -106,10 +109,10 @@
         });
     }
 
-    document.addEventListener("DOMContentLoaded", () => { loadWeight(); })
+document.addEventListener("DOMContentLoaded", () => { loadWeight(); })
 
-    //this is setting the cookie of the employee's id with AJAX GET
-    window.onload = function() { 
+//this is setting the cookie of the employee's id with AJAX GET
+window.onload = function() { 
         let email = document.cookie.valueOf;
 
         let xhttp = new XMLHttpRequest();

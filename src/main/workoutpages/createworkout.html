@@ -47,19 +47,20 @@
         </div>
 
     <div class="main">
+    <!--workout name input field-->  
     <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">Workout Name</span>
         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Enter a name for your workout...">
     </div>
 
-    <table class="table">
+    <!--added exercises table-->
+    <table class="table" id="table">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Exercise</th>
             <th scope="col">Sets</th>
             <th scope="col">Reps</th>
-            <th scope="col">Calories Burned</th>
           </tr>
         </thead>
         <tbody>
@@ -72,6 +73,7 @@
         </tbody>
       </table>
 
+      <!--exercise select type-->
       <select class="form-select" aria-label="Default select example" id="ex">
         <option selected value="0">Select Exercise</option>
         <option value="1">One</option>
@@ -81,6 +83,7 @@
 
       <hr>
 
+      <!--sets and reps input fields-->
       <div class="input-group mb-3">
         <input type="number" class="form-control" placeholder="Sets" aria-label="Username" id="sets">
         <span class="input-group-text">X</span>
@@ -89,10 +92,12 @@
 
       <hr>
 
+      <!--buttons on the bottom of page-->
       <div class="container">
         <div class="row">
           <div class="col-sm">
-            <button class="btn btn-outline-secondary" onclick="addExercise()">Add Exercise</button> <br></br>
+            <button class="btn btn-outline-secondary" onclick="addExercise()">Add Exercise</button>
+            <button class="btn btn-outline-secondary" onclick="clearList()">Clear List</button>
           </div>
           <div class="col-sm">
             <button class="btn btn-outline-secondary" onclick="addWorkout()">Create Workout</button>
@@ -110,21 +115,50 @@
 </body>
 
 <script>
+
+  count = 0;
+
   function addExercise() {
     
 
     
-
-
+    count = count + 1;
+    populateTable(count);
     clear();
   }
 
+  
+  //populates table with inputs
+  function populateTable(count) {
+    var bodyRef = document.getElementById("table").getElementsByTagName("tbody")[0];
+  
+    // var table = document.getElementById("table");
+
+    var row = bodyRef.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+
+    cell1.innerHTML = count;
+    cell2.innerHTML = document.getElementById("ex").value;
+    cell3.innerHTML = document.getElementById("sets").value;
+    cell4.innerHTML = document.getElementById("reps").value;
+
+
+        
+  }
+
+  //refreshes page and therefore clears out table
+  function clearList() {
+    location.reload();
+  }
+
+  //clears out input fields and exercise choice
   function clear() {
     document.getElementById('sets').value = '';
     document.getElementById('reps').value = '';
     document.getElementById('ex').value="0";
-
-
   }
 
 

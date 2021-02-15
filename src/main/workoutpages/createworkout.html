@@ -89,7 +89,18 @@
 
       <hr>
 
-      <button class="btn btn-outline-secondary" onclick="addWorkout()">Add Workout</button>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <button class="btn btn-outline-secondary" onclick="addExercise()">Add Exercise</button> <br></br>
+          </div>
+          <div class="col-sm">
+            <button class="btn btn-outline-secondary" onclick="addWorkout()">Create Workout</button>
+          </div>
+        </div>
+      </div>
+
+
       
 
     </div> <!--main wrapper-->
@@ -99,8 +110,8 @@
 </body>
 
 <script>
-  function addWorkout() {
-    let xhttp = XMLHttpRequest();
+  function addExercise() {
+    
 
     
 

@@ -6,8 +6,6 @@ import java.util.NoSuchElementException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,29 +57,29 @@ public class UserController {
 		}
 		return null;
 	}
-  
+
 	// To work with later for a login method
 	@PostMapping(value = "/users/securelogin", consumes = "application/json", produces = "application/json")
 	public User getUser(@RequestBody User user) {
 		try {
 			String username = user.getUsername();
 			String password = user.getPassword();
-      sess.setAttribute("loggedInUser", user);
-		  System.out.println("Session ID (login): " + sess.getId());
+			sess.setAttribute("loggedInUser", user);
+			System.out.println("Session ID (login): " + sess.getId());
 			return us.login(username, password);
 		} catch (Exception e) {
-      sess.invalidate();
+			sess.invalidate();
 			System.out.println("Exception in UserController.getUser login method");
 			e.printStackTrace();
 		}
 		return null;
 
 	}
-    
-  //Logout
+
+	// Logout
 	@PostMapping(value = "/users/logout")
 	public User logout() {
-		
+
 		return null;
 	}
 

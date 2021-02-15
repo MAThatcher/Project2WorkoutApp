@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,39 +16,63 @@ import com.revature.beans.Sets;
 import com.revature.services.SetsServiceImpl;
 
 @RestController
-public class SetsControllerImpl implements SetsController{
+public class SetsControllerImpl implements SetsController {
 
 	@Autowired
 	SetsServiceImpl ss;
-	
+
 	@GetMapping(value = "/sets/{id}")
-	public Sets getSet(@PathVariable("id") String id)
-	{
-		return ss.getSet(Integer.parseInt(id));
+	public Sets getSet(@PathVariable("id") int id) {
+		try {
+			return ss.getSet(id);
+		} catch (NoSuchElementException e) {
+			System.out.println("NoSuchElementException in SetsControllerImpl.getSet");
+			// e.printStackTrace();
+		}
+		return null;
 	}
-	
+
 	@GetMapping(value = "/sets", produces = "application/json")
-	public List<Sets> getAllSets()
-	{
-		return ss.getAllSets();
+	public List<Sets> getAllSets() {
+		try {
+			return ss.getAllSets();
+		} catch (NoSuchElementException e) {
+			System.out.println("NoSuchElementException in SetsControllerImpl.getAllSets");
+			// e.printStackTrace();
+		}
+		return null;
 	}
-	
+
 	@PostMapping(value = "/sets", consumes = "application/json", produces = "application/json")
-	public Sets addSet(@RequestBody Sets set)
-	{
-		return ss.addSet(set);
+	public Sets addSet(@RequestBody Sets set) {
+		try {
+			return ss.addSet(set);
+		} catch (Exception e) {
+			System.out.println("Exception in SetsControllerImpl.addSet Likely duplicate value in unique column");
+			// e.printStackTrace();
+		}
+		return null;
 	}
-	
+
 	@PutMapping(value = "/sets/{id}", consumes = "application/json")
-	public Sets updateSet(@PathVariable("id") int id, @RequestBody Sets change)
-	{
-		change.setSet_id(id);
-		return ss.updateSet(change);
+	public Sets updateSet(@PathVariable("id") int id, @RequestBody Sets change) {
+		try {
+			change.setSet_id(id);
+			return ss.updateSet(change);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
-	
+
 	@DeleteMapping(value = "/sets/{id}")
-	public boolean deleteSet(@PathVariable("id") int id)
-	{
-		return ss.deleteSet(id);
+	public boolean deleteSet(@PathVariable("id") int id) {
+		try {
+			return ss.deleteSet(id);
+		} catch (NoSuchElementException e) {
+			System.out.println("NoSuchElementException in SetsControllerImpl.deleteSet");
+			// e.printStackTrace();
+		}
+		return false;
 	}
 }

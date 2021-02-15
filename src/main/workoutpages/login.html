@@ -4,40 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquiry/3.3.1/jquiry.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <title>Workout Tracker Login</title>
+    <title>Track Login</title>
     <link rel="stylesheet" type="text/CSS" href="login.css">
 </head>
 <body>
 
-    <!--Nav Bar-->
-    <nav class="navbar navbar-expand-md navbar-light big-light sticky-top">
-        <div class="container-fluid">
-            <a href="" class="nav-link">Home</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="" class="nav-link">Information</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link">Edit Account</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link">Logout</a>
-                    </li>
-                </ul>
+    <!--Welcome Message-->
+    <div class="welcome">
+        <div class="container-fluid padding">
+        <div class="row welcome text-center">
+            <div class="col-12">
+                <h1 class="display-4">Track Login Page</h1>
             </div>
-    
+            <hr>
         </div>
-        </nav>
-
-    <h1>Workout Tracker Login Page</h1>
+        </div>
+        </div>
 
     <form>
         <div class="form-group">
@@ -48,17 +31,51 @@
           <label for="exampleInputPassword1">Password</label>
           <input type="password" class="form-control" id="password" placeholder="Enter Password"><br>
         </div>
-        <button type="button" id="submit" class="btn btn-primary" onclick="login()">Login</button>
-        <button type="button" id="submit" class="btn btn-primary" onclick="create()">Create New Account</button>
+        <a href="http://localhost:8080/Project2WorkoutApp/main.html" class="btn btn-outline-secondary">Login</a>
+        <a href="http://localhost:8080/Project2WorkoutApp/createaccount.html" class="btn btn-outline-secondary" onclick="login()">Create New Account</a>
+
     </form>
     
 </body>
 
 <script>
-    function create() {
-        window.location.href="createaccount.html";
-    }
+    
+    //sets and sends cookies to other pages
+    function login() {
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        
 
+        let emp = {
+            empEmail: email,
+            empPassword: password
+        }
+
+        let xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200) {
+                if(this.responseText != "{}") {
+                    document.cookie=`email = ${emp.empEmail}; 
+                    path = "http://localhost:8080/Project2WorkoutApp/main.html; 
+                    path = "http://localhost:8080/Project2WorkoutApp/progress.html
+                    path = "http://localhost:8080/Project2WorkoutApp/createWorkout.html
+                    path = "http://localhost:8080/Project2WorkoutApp/analysis.html`
+                }
+            }
+                
+            
+        }
+
+        console.log(emp);
+        console.log(JSON.stringify(emp));
+
+        xhttp.open("POST", "http://localhost:8080/TrmsApp/login.do", true);
+
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+
+        xhttp.send(JSON.stringify(emp));
+    }
 
 </script>
 

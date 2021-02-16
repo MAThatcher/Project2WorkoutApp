@@ -1,11 +1,16 @@
 package com.revature.controllers;
 
+import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +30,7 @@ public class UserController {
 	UserService us;
 	@Autowired
 	HttpSession sess;
-
+	
 	@GetMapping(value = "/users/{id}")
 	public User getUser(@PathVariable("id") int id) {
 		try {
@@ -59,23 +64,31 @@ public class UserController {
 	}
 
 	// To work with later for a login method
-	@PostMapping(value = "/users/securelogin", consumes = "application/json", produces = "application/json")
-	public User getUser(@RequestBody User user) {
-		try {
-			String username = user.getUsername();
-			String password = user.getPassword();
-			sess.setAttribute("loggedInUser", user);
-			System.out.println("Session ID (login): " + sess.getId());
-			return us.login(username, password);
-		} catch (Exception e) {
-			sess.invalidate();
-			System.out.println("Exception in UserController.getUser login method");
-			e.printStackTrace();
-		}
-		return null;
-
+	@GetMapping(value = "/users/securelogin")
+	public User getUserLogin(@RequestParam(required = true) String username, String password, HttpServletResponse response) {
+		User loggedInUser = us.login(username, password);
+		Cookie cookie = new Cookie("id", String.valueOf(loggedInUser.getUserID()));
+		cookie.setSecure(true);
+		cookie.setHttpOnly(true);
+		cookie.setPath("/");
+		cookie.setSecure(true);
+		response.addCookie(cookie);
+		
+		return loggedInUser;
 	}
 
+	// To work with later for a login method
+	@GetMapping(value = "/users/viewLoggedInUser")
+	public User viewUserLogin(HttpServletRequest request) {
+		Cookie[] cookies = request.getCookies();
+		String cookieId = cookies[0].getValue();
+		int id = Integer.parseInt(cookieId);
+		System.out.println(id);
+		User loggedInUser = us.findUserByID(id);
+		System.out.println(loggedInUser.toString());
+		return loggedInUser;
+	}
+	
 	// Logout
 	@PostMapping(value = "/users/logout")
 	public User logout() {

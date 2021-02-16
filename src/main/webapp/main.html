@@ -116,8 +116,34 @@
       </div>
     </div>
   </div>
-
+<p id="welcome">wtffffffffff</p>
+ <script>
  
+function displayUser()
+{
+	console.log("displayer user");
+
+	//Make an AJAX call
+	let xhttp = new XMLHttpRequest();
+	
+	xhttp.onreadystatechange = function()
+	{
+		if(this.readyState == 4 && this.status == 200)
+		{
+				console.log(this.responseText);
+				
+				let employee = JSON.parse(this.responseText);
+				console.log("displayer user");
+
+				document.getElementById("welcome").innerHTML = "Hi " + employee.fname;
+		}
+	}
+	
+	xhttp.open("GET", "http://localhost:8080/users/viewLoggedInUser", true);
+	xhttp.send();
+}
+window.onload = displayUser;
+</script>
     
 </body>
 

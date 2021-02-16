@@ -67,15 +67,15 @@
       </table>
 
     <div class="input-group mb-3">
-        <input type="number" class="form-control" placeholder="Update weight in pounds" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <input type="number" class="form-control" placeholder="Update current weight" id="currWeight">
         <span class="input-group-text" id="basic-addon2">Pounds</span>
     </div>
     <div class="input-group mb-3">
-        <input type="number" class="form-control" placeholder="Update height in inches" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <input type="number" class="form-control" placeholder="Update goal weight" id="goalWeight">
         <span class="input-group-text" id="basic-addon2">Inches</span>
     </div>
 
-    <button class="btn btn-outline-secondary" onclick="">Update</button>
+    <button class="btn btn-outline-secondary" onclick="update()">Update</button>
 
 
 
@@ -147,8 +147,34 @@
         xhttp.send();
     }
 
+    //sends post request to update weight and height for user
+    function update() {
+        
+        let curr=document.getElementById("currWeight").value;
+        let goal=document.getElementById("goalWeight").value;
 
+        let goals_bodyweight= {
+            current_bodyweight: curr,
+            goal_bodyweight: goal
+        }
 
+        let xhttp = new XMLHttpRequest();
+
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+        }
+
+        xhttp.open("POST", "http://localhost:8080/Project2WorkoutApp/users", true);
+
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+
+        xhttp.send(JSON.stringify(user));
+    }
+
+    //updates table by simply refreshing page and grabbing new, updated database information
+    function updateTable() {
+        location.reload();
+    }
 
 </script>
 

@@ -31,8 +31,8 @@
           <label for="exampleInputPassword1">Password</label>
           <input type="password" class="form-control" id="password" placeholder="Enter Password"><br>
         </div>
-        <a href="http://localhost:8080/Project2WorkoutApp/main.html" class="btn btn-outline-secondary">Login</a>
-        <a href="http://localhost:8080/Project2WorkoutApp/createaccount.html" class="btn btn-outline-secondary" onclick="login()">Create New Account</a>
+        <a href="http://localhost:8080/Project2WorkoutApp/src/main/workoutpages/main.html" class="btn btn-outline-secondary">Login</a>
+        <a href="http://localhost:8080/Project2WorkoutApp/src/main/workoutpages/createaccount.html" class="btn btn-outline-secondary" onclick="login()">Create New Account</a>
 
     </form>
     
@@ -57,10 +57,10 @@
             if(this.readyState == 4 && this.status == 200) {
                 if(this.responseText != "{}") {
                     document.cookie=`email = ${emp.empEmail}; 
-                    path = "http://localhost:8080/Project2WorkoutApp/main.html; 
-                    path = "http://localhost:8080/Project2WorkoutApp/progress.html
-                    path = "http://localhost:8080/Project2WorkoutApp/createWorkout.html
-                    path = "http://localhost:8080/Project2WorkoutApp/analysis.html`
+                    path = "http://localhost:8080/Project2WorkoutApp/src/main/workoutpages/main.html; 
+                    path = "http://localhost:8080/Project2WorkoutApp/src/main/workoutpages/progress.html
+                    path = "http://localhost:8080/Project2WorkoutApp/src/main/workoutpages/createWorkout.html
+                    path = "http://localhost:8080/Project2WorkoutApp/src/main/workoutpages/analysis.html`
                 }
             }
                 

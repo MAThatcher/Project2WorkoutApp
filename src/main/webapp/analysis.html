@@ -113,28 +113,29 @@ function populateTable(json) {
 
 document.addEventListener("DOMContentLoaded", () => { loadWeight(); })
 
-//this is setting the cookie of the employee's id with AJAX GET
-window.onload = function() { 
-        let email = document.cookie.valueOf;
+window.onload = function displayUser()
+{
+	console.log("displayer user");
 
-        let xhttp = new XMLHttpRequest();
+	//Make an AJAX call
+	let xhttp = new XMLHttpRequest();
+	
+	xhttp.onreadystatechange = function()
+	{
+		if(this.readyState == 4 && this.status == 200)
+		{
+				console.log(this.responseText);
+				
+				let employee = JSON.parse(this.responseText);
+				console.log("displayer user");
 
-        xhttp.onreadystatechange = function() {
-            if(this.readyState == 4 && this.status == 200) {
-                console.log(this.responseText);
-
-                let user = JSON.parse(this.responseText);
-
-                id = user.userId;
-
-                loadWeight();
-            }
-        }
-
-        xhttp.open("GET", "http://localhost:8080/Project2WorkoutApp/users/search", true);
-
-        xhttp.send();
-    }
+				let uid = employee.user_id;
+		}
+	}
+	
+	xhttp.open("GET", "http://localhost:8080/users/viewLoggedInUser", true);
+	xhttp.send();
+}
 
 
 

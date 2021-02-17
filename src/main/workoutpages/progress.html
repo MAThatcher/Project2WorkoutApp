@@ -162,6 +162,8 @@
 
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
+            clearInputs();
+            populateTable();
         }
 
         xhttp.open("POST", "http://localhost:8080/Project2WorkoutApp/users", true);
@@ -174,6 +176,12 @@
     //updates table by simply refreshing page and grabbing new, updated database information
     function updateTable() {
         location.reload();
+    }
+
+    //clears out input fields and exercise choice
+    function clearInputs() {
+        document.getElementById('currWeight').value = '';
+        document.getElementById('goalWeight').value = '';
     }
 
 </script>

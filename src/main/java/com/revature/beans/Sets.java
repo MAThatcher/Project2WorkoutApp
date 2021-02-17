@@ -26,6 +26,9 @@ public class Sets {
 	@Column(name = "total_calories")
 	private int total_calories;
 	
+	@Column(name ="amount_sets")
+	private int amount_sets;
+
 	@ManyToOne
 	@JoinColumn(name = "ex_id")
 	private ExerciseReference exercise;
@@ -34,19 +37,25 @@ public class Sets {
     @JoinColumn(name = "workout_id")
 	private Workout workout;
 
+    
+
 	public Sets() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Sets(int set_id, int repetitions, int total_calories, ExerciseReference exercise, Workout workout) {
+	
+	public Sets(int set_id, int repetitions, int total_calories, int amount_sets, ExerciseReference exercise,
+			Workout workout) {
 		super();
 		this.set_id = set_id;
 		this.repetitions = repetitions;
 		this.total_calories = total_calories;
+		this.amount_sets = amount_sets;
 		this.exercise = exercise;
 		this.workout = workout;
 	}
+
 
 	public int getSet_id() {
 		return set_id;
@@ -87,10 +96,18 @@ public class Sets {
 	public void setWorkout(Workout workout) {
 		this.workout = workout;
 	}
+	public int getAmount_sets() {
+		return amount_sets;
+	}
+
+	public void setAmount_sets(int amount_sets) {
+		this.amount_sets = amount_sets;
+	}
 
 	@Override
 	public String toString() {
-		return "Sets [set_id=" + set_id + ", repetitions=" + repetitions + ", total_calories=" + total_calories + "]";
+		return "Sets [set_id=" + set_id + ", repetitions=" + repetitions + ", total_calories=" + total_calories
+				+ ", amount_sets=" + amount_sets + ", exercise=" + exercise + ", workout=" + workout + "]";
 	}
 
     

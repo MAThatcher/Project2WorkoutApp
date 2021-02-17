@@ -50,7 +50,7 @@
     <!--workout name input field-->  
     <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">Workout Name</span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Enter a name for your workout...">
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Enter a name for your workout..." id="workoutName">
     </div>
 
     <!--added exercises table-->
@@ -145,6 +145,7 @@ document.getElementById("workouts").onchange = displayWorkoutInfo;
 var listOfExercises = [];
 var listOfSets = [];
 var allExercises;
+var loggedInUser;
  function addExercise() {
 	  
 		var x = document.getElementById("exercises");
@@ -191,7 +192,7 @@ var allExercises;
 	opt.appendChild(document.createTextNode(exercise.name + " for " + set.amount_sets + " sets and " + set.repetitions + " repetitions"));
 	opt.value = listOfSets.length - 1;
 	sel.appendChild(opt);
-    clear();
+    clearInputs();
   }
 
   //clears out input fields and exercise choice
@@ -202,9 +203,6 @@ var allExercises;
     document.getElementById('exerciseType').value="0";
   }
 
-  function addWorkout() {
-    //no idea how this will be accomplished yet
-  }
 function displayWorkoutInfo()
 {
 	var exerciseColumn = document.getElementById("exerciseColumn");
@@ -279,6 +277,53 @@ function getAllExercises()
 	xhttp.open("GET", "http://localhost:8080/exerciseReference", true);
 	xhttp.send();
 }
+
+function addWorkout() {
+    var workoutTypeElement = document.getElementById("workoutType")
+    var i = workoutTypeElement.selectedIndex;
+    var workoutType = workoutTypeElement.options[i].text;
+    var workoutName = document.getElementById("workoutName").value;
+	var totalCalories = 0;
+	for(var i = 0; i < listOfSets.length; i++)
+	{
+		totalCalories = totalCalories + listOfSets[i].total_calories;
+	}
+	
+	let workout = {
+			workout_id: 0,
+			name: workoutName,
+			duration: 60,
+			mGroup: workoutType,
+			calories: totalCalories,
+			user: null
+	}
+	
+	let xhttp = new XMLHttpRequest();
+	
+	xhttp.onreadystatechange = function()
+	{
+		console.log(this.readyState);
+		if(this.readyState == 4 && this.status == 200)
+		{
+			var returnedWorkOut = JSON.parse(this.responseText);
+			user = returnedWorkOut.user;
+			console.log(user);
+			alert("Workout Created. Proud of you.");
+		}
+	}
+	
+	xhttp.open("POST", "http://localhost:8080/workout", true);
+	
+	//Set a request header which will indicate to the server that the request body will be JSON
+	xhttp.setRequestHeader("Content-Type", "application/json");
+	
+	//Send, but now we will pass in the Request Body as a parameter of the function
+	xhttp.send(JSON.stringify(workout));
+  }
+ function addSets()
+ {
+	 
+ }
 window.onload = getAllExercises;
 
 </script>

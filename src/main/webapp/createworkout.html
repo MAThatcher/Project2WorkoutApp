@@ -56,10 +56,10 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Exercise</th>
-            <th scope="col">Sets</th>
-            <th scope="col">Reps</th>
-            <th scope="col">Calories Burned</th>
+            <th scope="col" id="exerciseColumn">Exercise</th>
+            <th scope="col" id="setColumn">Sets</th>
+            <th scope="col" id="repColumn">Reps</th>
+            <th scope="col" id="calorieColumn">Calories Burned</th>
           </tr>
         </thead>
         <tbody>
@@ -72,28 +72,50 @@
         </tbody>
       </table>
 
-      <select class="form-select" aria-label="Default select example" id="ex">
-        <option selected value="0">Select Exercise</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+	  <p> 1. Select the theme of your Workout. </p>
+      <select class="form-select" aria-label="Default select example" id="workoutType">
+        <option selected value="0">Select Workout Type</option>
+        <option value="1">Arms</option>
+        <option value="2">Back</option>
+        <option value="3">Chest</option>
+        <option value="4">Legs</option>
+        <option value="5">Full body</option>
+        <option value="6">Upper body</option>
+        <option value="7">Lower body</option>
       </select>
-
+      
+      <br></br>
+ 	  <p>2. Select the type of exercise</p>
+      <select class="form-select" aria-label="Default select example" id="exerciseType">
+        <option selected value="0">Select Exercise Type</option>
+        <option value="1">cardio</option>
+        <option value="2">calisthenics</option>
+        <option value="3">weightlifting</option>
+      </select>
+      
+		<br></br>
+    	<p>3. Select from the list of exercises we have provided based on your exercise type.</p>
+      <select class="form-select" aria-label="Default select example" id="exercises">
+      </select>
+      
       <hr>
-
       <div class="input-group mb-3">
         <input type="number" class="form-control" placeholder="Sets" aria-label="Username" id="sets">
         <span class="input-group-text">X</span>
         <input type="number" class="form-control" placeholder="Reps" aria-label="Server" id="reps">
       </div>
-
       <hr>
-
+      
+      <p>4. View your workout</p>
+      <select class="form-select" aria-label="Default select example" id="workouts">
+      </select>
+		<br></br>
+		
       <div class="container">
         <div class="row">
           <div class="col-sm">
             <button class="btn btn-outline-secondary" onclick="addExercise()">Add Exercise</button> <br></br>
-          </div>
+          </div>               
           <div class="col-sm">
             <button class="btn btn-outline-secondary" onclick="addWorkout()">Create Workout</button>
           </div>
@@ -110,24 +132,141 @@
 </body>
 
 <script>
-  function addExercise() {
-    
-
-    
-
-
+document.getElementById("exerciseType").onchange = displayExercises;
+document.getElementById("workouts").onchange = displayWorkoutInfo;
+var listOfExercises = [];
+var listOfSets = [];
+var allExercises;
+ function addExercise() {
+	  
+		var x = document.getElementById("exercises");
+		var i = x.selectedIndex;
+		let exerciseId = x.options[i].value;
+		let exerciseName = x.options[i].text;
+		let exercise = 
+		{
+			id:exerciseId,
+			name: exerciseName
+		}
+    listOfExercises.push(exercise);
+	
+	var exerciseCalories;
+	for(var i = 0; i < allExercises.length; i++)
+	{
+		if(allExercises[i].name == exercise.name)
+		{
+			exerciseCalories = allExercises[i].calories;	
+		}
+	}
+	
+	var setElement = document.getElementById("sets");
+	var amountOfSets = setElement.value;
+	
+	var repElement = document.getElementById("reps");
+	var amountOfReps = repElement.value;
+	
+	var totalReps = amountOfReps * amountOfSets;
+	var totalCalories = totalReps * exerciseCalories;
+	let set = 
+	{
+		set_id: 0,
+		repetitions: amountOfReps,
+		total_calories: totalCalories,
+		amount_sets: amountOfSets,
+		exercise: exercise
+	}
+	listOfSets.push(set);
+	console.log(listOfSets);
+	
+	var sel = document.getElementById("workouts");
+	var opt = document.createElement('option');
+	opt.appendChild(document.createTextNode(exercise.name + " for " + set.amount_sets + " sets and " + set.repetitions + " repetitions"));
+	opt.value = listOfSets.length - 1;
+	sel.appendChild(opt);
     clear();
   }
 
   function clear() {
     document.getElementById('sets').value = '';
     document.getElementById('reps').value = '';
-    document.getElementById('ex').value="0";
+    document.getElementById('exerciseType').value="0";
 
 
   }
+function displayWorkoutInfo()
+{
+	var exerciseColumn = document.getElementById("exerciseColumn");
+	var setColumn = document.getElementById("setColumn");
+	var repColumn = document.getElementById("repColumn");
+	var calorieColumn = document.getElementById("calorieColumn");
 
+	var x = document.getElementById("workouts");
+	var i = x.selectedIndex;
+	
+	exerciseColumn.innerHTML = "Exercise: " + listOfExercises[i].name;
+	setColumn.innerHTML = "Sets: " + listOfSets[i].amount_sets;
+	repColumn.innerHTML = "Reps: " + listOfSets[i].repetitions;
+	calorieColumn.innerHTML = "Calories Burned: " + listOfSets[i].total_calories;
+	
+}
+function displayExercises()
+  {
+	var stuff = document.getElementById('exercises');
+	while(stuff.options.length > 0)
+	{
+		stuff.remove(0);	
+	}
+	var exercises = document.getElementById("exerciseType");
+	var i = exercises.selectedIndex;
+	let type = exercises.options[i].text;
+	
+  	//Make an AJAX call
+  	let xhttp = new XMLHttpRequest();
+  	
+  	xhttp.onreadystatechange = function()
+  	{
+  		if(this.readyState == 4 && this.status == 200)
+  		{
+  				console.log(this.responseText);
+  				
+  				let exercises = JSON.parse(this.responseText);
+  				
+  				var sel = document.getElementById('exercises');
+  				for(var i = 0; i < exercises.length; i++)
+  				{
+  					var opt = document.createElement('option');
+  					opt.appendChild(document.createTextNode(exercises[i].name));
+  					opt.value = exercises[i].id;
+  					sel.appendChild(opt);
+  				}
+  		}
+  	}
+  	
+  	xhttp.open("GET", "http://localhost:8080/exerciseReferenceByType/" + type, true);
+  	xhttp.send();
+  }
+  
+function getAllExercises()
+{
 
+	//Make an AJAX call
+	let xhttp = new XMLHttpRequest();
+	
+	xhttp.onreadystatechange = function()
+	{
+		if(this.readyState == 4 && this.status == 200)
+		{
+				console.log("got exercises");
+				
+				allExercises = JSON.parse(this.responseText);
+				
+		}
+	}
+	
+	xhttp.open("GET", "http://localhost:8080/exerciseReference", true);
+	xhttp.send();
+}
+window.onload = getAllExercises;
 </script>
 
 </html>

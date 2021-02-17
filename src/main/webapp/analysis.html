@@ -79,10 +79,12 @@ const table = document.querySelector("#table > tbody")
 
 //grabs the goals_bodyweight information for a specific user
 function loadWeight () {
+        console.log("inside loadweight()");
+        console.log("uid is: " + uid);
         const xhttp = new XMLHttpRequest();
 
         //goals bodyweight link here
-        xhttp.open("GET", `http://localhost:8080/Project2WorkoutApp/workout/${id}`, true);
+        xhttp.open("GET", `http://localhost:8080/Project2WorkoutApp/workout/${uid}`, true);
 
         xhttp.onload = () => {
             try {

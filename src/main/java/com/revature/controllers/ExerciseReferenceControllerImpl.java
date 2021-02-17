@@ -52,6 +52,7 @@ public class ExerciseReferenceControllerImpl implements ExerciseReferenceControl
 		}
 		return null;
 	}
+	
 
 	@PutMapping(value = "/exerciseReference/{id}", consumes = "application/json")
 	public ExerciseReference updateExerciseReference(@PathVariable("id") int id, @RequestBody ExerciseReference er) {

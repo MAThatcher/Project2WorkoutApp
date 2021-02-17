@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,24 @@ public class ExerciseReferenceServiceImpl implements ExerciseReferenceService{
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	//Additional Services
+	public List<ExerciseReference> getAllExerciseReferencesByType(String type)
+	{
+		List<ExerciseReference> allExercises = (List<ExerciseReference>) err.findAll();
+		List<ExerciseReference> allExercisesOfType = new ArrayList<ExerciseReference>();
+		
+		//If exercise in the list of all exercises match the type provided in the string "type"
+		//Add it to the new list of exercises
+		for(ExerciseReference exercise : allExercises)
+		{
+			if(exercise.getType().equals(type))
+			{
+				allExercisesOfType.add(exercise);
+			}
+		}
+		return allExercisesOfType;
 	}
 	
 }

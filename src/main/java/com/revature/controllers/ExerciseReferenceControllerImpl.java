@@ -76,4 +76,15 @@ public class ExerciseReferenceControllerImpl implements ExerciseReferenceControl
 		return false;
 	}
 
+	//Additional Controller methods
+	@GetMapping(value = "/exerciseReferenceByType/{type}", produces = "application/json")
+	public List<ExerciseReference> getAllExerciseReferencesByType(@PathVariable("type") String type) {
+		try {
+			return ers.getAllExerciseReferencesByType(type);
+		} catch (NoSuchElementException e) {
+			System.out.println("NoSuchElementException in ExerciseReferencesController.getAllExerciseReferences");
+			// e.printStackTrace();
+		}
+		return null;
+	}
 }

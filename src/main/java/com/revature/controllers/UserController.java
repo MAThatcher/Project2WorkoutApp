@@ -82,23 +82,28 @@ public class UserController {
 	@CrossOrigin
 	//@ModelAttribute("loggedInUser")
 	//public @ResponseBody @ModelAttribute("loggedInUser") User getUser(@SessionAttribute("loggedInUser") @RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
-	public @ResponseBody User getUser(@RequestBody User user, /*HttpSession sess*/HttpServletRequest request, Model model) {
+	public @ResponseBody User getUser(@RequestBody User user, HttpSession sess, HttpServletRequest request, Model model) {
 		
 		//model.addAttribute
-		//HttpSession sess = request.getSession();
+		//HttpSession sess = request.getSession(); //Needs either this or HttpSession as a parameter to work
 		//Model model = new Model();
-		try {			
+		try {		
+			//user = testGetUser(); //Makes null -> Error that prevents login
+			
+			//http.sessionManagement().sessionFixation().migrateSession()
+			
 			String username = user.getUsername();
 			String password = user.getPassword();
 			//user = us.findUserByUsername(username); //Testing
 			user = us.login(username, password);
-			HttpSession sess = request.getSession();
+			//HttpSession sess = request.getSession();
 			
 			//System.out.println("User: " + user);
 //			sess.setAttribute("loggedInUser", user); //This is the problem
 //			System.out.println("Session User: " + sess.getAttribute("loggedInUser"));
 			System.out.println("Session ID (login): " + sess.getId());
-			model.addAttribute("loggedInUser", user);
+			model.addAttribute("loggedInUser", user); //If don't do this, just uses whatever the default settings are in testGetUser()
+			
 			System.out.println("User after attempting add: " + model.getAttribute("loggedInUser"));
 			
 			//response.getWriter().append(gson.toJson(user));
@@ -114,21 +119,24 @@ public class UserController {
 
 	}
 	
-	@PostMapping(value = "/users/checkuser", produces = "application/json")
-	@CrossOrigin
 	//public @ResponseBody User checkUser(/*HttpServletRequest request @SessionAttribute("loggedInUser") User user*/) {
 	//public @ResponseBody User checkUser(HttpSession session /*ServletRequest request, HttpServletResponse response*/) {
-	public @ResponseBody User checkUser(/*@ModelAttribute("loggedInUser") User user, HttpSession sess,*/HttpServletRequest request, Model model) {
+	
+	@PostMapping(value = "/users/checkuser", produces = "application/json")
+	@CrossOrigin
+	public @ResponseBody User checkUser(/*@ModelAttribute("loggedInUser") User user,*/ HttpSession sess, HttpServletRequest request, Model model) {
+		
 		//sess = session;
-		//HttpSession sess = request.getSession();
-		HttpSession sess = request.getSession();
-		System.out.println("Session ID (checkUser): " + sess.getId());		
-		//User user = (User) session.getAttribute("loggedInUser");
+		//HttpSession sess = request.getSession(); //Not sure if this is what keeps making a new session or if it's within Spring Security
+												//Either way, it throws an IllegalStateException unless either or both this line and/or HttpSession as parameter		
+		//User user = (User) session.getAttribute("loggedInUser");//Repeated line, alternate is make new User object and set user =...
 		//System.out.println(user);
 		//User user = loggedInUser;
-		User user = new User();
+		//User user = new User();
+		
+		System.out.println("Session ID (checkUser): " + sess.getId());	
 		System.out.println(model.containsAttribute("loggedInUser"));
-		user = (User) model.getAttribute("loggedInUser");
+		User user = (User) model.getAttribute("loggedInUser");
 		System.out.println("Current Logged-in User: " + user);
 		if (user == null) {
 			return null;

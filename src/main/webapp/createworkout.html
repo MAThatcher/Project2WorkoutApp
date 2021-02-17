@@ -15,7 +15,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="http//localhost:8080/Project2WorkoutApp/main.html">Home</a>
+          <a class="navbar-brand" href="http//localhost:8080/Project2WorkoutApp/src/main/workoutpages/main.html">Home</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -23,8 +23,8 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">   
             </ul>
             <form class="d-flex">
-                <a class="navbar-brand" href="http://localhost:8080/Project2WorkoutApp/information.html">Information</a>
-                <a class="navbar-brand" href="http://localhost:8080/Project2WorkoutApp/login.html">Logout</a>
+                <a class="navbar-brand" href="http://localhost:8080/Project2WorkoutApp/src/main/workoutpages/information.html">Information</a>
+                <a class="navbar-brand" href="http://localhost:8080/Project2WorkoutApp/src/main/workoutpages/login.html">Logout</a>
                 
             </form>
           </div>
@@ -47,19 +47,23 @@
         </div>
 
     <div class="main">
+    <!--workout name input field-->  
     <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">Workout Name</span>
         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Enter a name for your workout...">
     </div>
 
-    <table class="table">
+    <!--added exercises table-->
+    <table class="table" id="table">
         <thead>
           <tr>
             <th scope="col">#</th>
+
             <th scope="col" id="exerciseColumn">Exercise</th>
             <th scope="col" id="setColumn">Sets</th>
             <th scope="col" id="repColumn">Reps</th>
             <th scope="col" id="calorieColumn">Calories Burned</th>
+
           </tr>
         </thead>
         <tbody>
@@ -82,6 +86,7 @@
         <option value="5">Full body</option>
         <option value="6">Upper body</option>
         <option value="7">Lower body</option>
+
       </select>
       
       <br></br>
@@ -99,13 +104,14 @@
       </select>
       
       <hr>
+
       <div class="input-group mb-3">
         <input type="number" class="form-control" placeholder="Sets" aria-label="Username" id="sets">
         <span class="input-group-text">X</span>
         <input type="number" class="form-control" placeholder="Reps" aria-label="Server" id="reps">
       </div>
       <hr>
-      
+
       <p>4. View your workout</p>
       <select class="form-select" aria-label="Default select example" id="workouts">
       </select>
@@ -116,6 +122,7 @@
           <div class="col-sm">
             <button class="btn btn-outline-secondary" onclick="addExercise()">Add Exercise</button> <br></br>
           </div>               
+
           <div class="col-sm">
             <button class="btn btn-outline-secondary" onclick="addWorkout()">Create Workout</button>
           </div>
@@ -132,6 +139,7 @@
 </body>
 
 <script>
+
 document.getElementById("exerciseType").onchange = displayExercises;
 document.getElementById("workouts").onchange = displayWorkoutInfo;
 var listOfExercises = [];
@@ -184,14 +192,20 @@ var allExercises;
 	opt.value = listOfSets.length - 1;
 	sel.appendChild(opt);
     clear();
+
   }
 
-  function clear() {
+  //clears out input fields and exercise choice
+  function clearInputs() {
     document.getElementById('sets').value = '';
     document.getElementById('reps').value = '';
+
     document.getElementById('exerciseType').value="0";
 
 
+
+  function addWorkout() {
+    //no idea how this will be accomplished yet
   }
 function displayWorkoutInfo()
 {
@@ -199,6 +213,7 @@ function displayWorkoutInfo()
 	var setColumn = document.getElementById("setColumn");
 	var repColumn = document.getElementById("repColumn");
 	var calorieColumn = document.getElementById("calorieColumn");
+
 
 	var x = document.getElementById("workouts");
 	var i = x.selectedIndex;
@@ -267,6 +282,7 @@ function getAllExercises()
 	xhttp.send();
 }
 window.onload = getAllExercises;
+
 </script>
 
 </html>

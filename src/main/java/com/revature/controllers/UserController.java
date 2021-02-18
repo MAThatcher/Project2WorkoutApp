@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.User;
@@ -104,8 +105,9 @@ public class UserController {
 	// For adding/registering a new user; can change name to "registerUser" if
 	// desired
 	@PostMapping(value = "/users", consumes = "application/json", produces = "application/json")
-	public User addUser(@RequestBody User user) {
+	public @ResponseBody User addUser(@RequestBody User user) {
 		try {
+
 			return us.addUser(user);
 		} catch (Exception e) {
 			System.out.println("Exception in UserController.addUser Likely duplicate value in unique column");

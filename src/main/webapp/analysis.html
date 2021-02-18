@@ -110,6 +110,8 @@ function loadWeight() {
 
     if(this.readyState == 4 && this.status == 200) {
       var workouts = JSON.parse(this.responseText);
+      //I want to be able to go through this json and get rid of user object
+      //user id does not need to be displayed, just the elements within workout that belong to that user
       console.log(typeof workouts);
       console.log(workouts)
       console.log(workouts.length);
@@ -139,8 +141,7 @@ function loadWeight() {
 
       }
     }
-
-  }
+  } 
 
   xhttp.open("GET", "http://localhost:8080/workout/26", true);
   //xhttp.open("GET", `http://localhost:8080/getUserWorkOut/${uid}`, true);

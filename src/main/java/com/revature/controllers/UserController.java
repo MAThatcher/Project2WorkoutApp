@@ -86,13 +86,21 @@ public class UserController {
 	// To work with later for a login method
 	@GetMapping(value = "/users/viewLoggedInUser")
 	public User viewUserLogin(HttpServletRequest request) {
-		Cookie[] cookies = request.getCookies();
-		String cookieId = cookies[0].getValue();
-		int id = Integer.parseInt(cookieId);
-		System.out.println(id);
-		User loggedInUser = us.findUserByID(id);
-		System.out.println(loggedInUser.toString());
-		return loggedInUser;
+		try {
+			Cookie[] cookies = request.getCookies();
+			String cookieId = cookies[0].getValue();
+			int id = Integer.parseInt(cookieId);
+			System.out.println(id);
+			User loggedInUser = us.findUserByID(id);
+			System.out.println(loggedInUser.toString());
+			return loggedInUser;
+		} catch (NullPointerException e) {
+			System.out.println("NullPointerException UserController.viewUserLogin");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 	// Logout
@@ -118,7 +126,7 @@ public class UserController {
 	}
 
 	@PutMapping(value = "/users/{id}", consumes = "application/json")
-	public User updateActor(@PathVariable("id") int userID, @RequestBody User change) {
+	public User updateUser(@PathVariable("id") int userID, @RequestBody User change) {
 		try {
 			change.setUserID(userID);
 			return us.updateUser(change);

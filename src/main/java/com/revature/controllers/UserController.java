@@ -147,8 +147,16 @@ public class UserController {
 	
 
 	// Logout
-	@PostMapping(value = "/users/logout")
-	public User logout() {
+	@GetMapping(value = "/users/logout")
+	public User logout(HttpServletRequest request, HttpServletResponse response) {
+		Cookie[] cookies = request.getCookies();
+		Cookie userCookie = cookies[0];
+		System.out.println("Current Cookie Value: " + userCookie.getValue());
+		userCookie.setValue(null);
+		System.out.println("(Should be) Null Cookie Value: " + userCookie.getValue());
+		userCookie.setMaxAge(0);
+		
+		response.addCookie(userCookie);
 
 		return null;
 	}

@@ -25,51 +25,60 @@
             </div>
             <hr>
         </div>
-        </div>
-        </div>
+    </div>
+</div>
 
     <form>
         <div class="form-group">
-          <label for="exampleInputPassword1">First Name</label>
+          <label for="fname">First Name</label>
           <input type="text" class="form-control" id="fname">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Last Name</label>
+            <label for="lname">Last Name</label>
             <input type="text" class="form-control" id="lname">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Username</label>
+            <label for="username">Username</label>
             <input type="text" class="form-control" id="username">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Email</label>
+            <label for="email">Email</label>
             <input type="text" class="form-control" id="email">
         </div>
+        <p id="passwordMatch" style="color:red"></p>
         <div class="form-group">
-            <label for="exampleInputPassword1">Phone Number</label>
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password">
+        </div>
+        <div class="form-group">
+            <label for="password2">Confirm Password</label>
+            <input type="password" class="form-control" id="password2">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
             <input type="number" class="form-control" id="phone">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Age</label>
+            <label for="age">Age</label>
             <input type="number" class="form-control" id="age">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Weight</label>
+            <label for="weight">Weight</label>
             <input type="number" class="form-control" id="weight">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Goal Weight</label>
+            <label for="goalweight">Goal Weight</label>
             <input type="number" class="form-control" id="goalweight">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Height in Inches</label>
+            <label for="height">Height in Inches</label>
             <input type="number" class="form-control" id="height">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Time you want to spend working out per week</label>
+            <label for="time">Time you want to spend working out per week</label>
             <input type="number" class="form-control" id="time">
         </div>
-        <select name="menu" id="type select">
+        <select name="menu" id="gender">
             <option value="">--Choose your gender--</option>
             <option value="1">Male</option>
             <option value="2">Female</option>
@@ -77,6 +86,7 @@
         </select><br></br>
 
         <button type="button" class="btn btn-outline-secondary" onclick="create()">Create Account</button>
+        <a class="btn btn-outline-secondary" href="http://localhost:8080/login.html">Back</a>
     </form>  
 
 </div>
@@ -84,7 +94,24 @@
 </body>
 
 <script>
-
+    document.getElementById("password").addEventListener("change", ()=>{
+        pw1 = document.getElementById("password").value;
+        pw2 = document.getElementById("password2").value;
+        if (pw1 != pw2){
+            document.getElementById("passwordMatch").innerHTML="Passwords do not match"
+        }else{
+            document.getElementById("passwordMatch").innerHTML=""
+        }
+    })
+    document.getElementById("password2").addEventListener("change", ()=>{
+        pw1 = document.getElementById("password").value;
+        pw2 = document.getElementById("password2").value;
+        if (pw1 != pw2){
+            document.getElementById("passwordMatch").innerHTML="Passwords do not match"
+        }else{
+            document.getElementById("passwordMatch").innerHTML=""
+        }
+    })
     //AJAX POST to add new user
     function create() { 
 
@@ -92,43 +119,56 @@
         let lname=document.getElementById("lname").value;
         let username=document.getElementById("username").value;
         let password=document.getElementById("password").value;
+        let password2=document.getElementById("password2").value;
         let email=document.getElementById("email").value;
-        let phoneNo=document.getElementById("phoneNo").value;
+        let phoneNo=document.getElementById("phone").value;
         let gender=document.getElementById("gender").value;
         let age=document.getElementById("age").value;
         let weight=document.getElementById("weight").value;
-        let goalWeight=document.getElementById("goalWeight").value;
+        let goalWeight=document.getElementById("goalweight").value;
         let height=document.getElementById("height").value;
         let time=document.getElementById("time").value;
 
+        if (password != password2){
+            console.log("Passwords dont match");
+            alert("Passwords do not match");
+            return;
+        }
+
         let user= {
-            user_fname: fname,
-            user_lname: lname,
-            user_username: username,
-            user_password: password,
-            user_email: email,
-            user_phone_number: phoneNo,
-            user_gender: gender,
-            user_age: age,
-            user_weight: weight,
-            user_goal_weight: goalWeight,
-            user_height: height,
-            user_time: time
+            fname,
+            lname,
+            username,
+            password,
+            email,
+            phNumber: phoneNo,
+            gender,
+            age,
+            weight,
+            goalWeight,
+            height,
+            time
         }
 
         let xhttp = new XMLHttpRequest();
-
-        if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
+        xhttp.onreadystatechange = () => {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                
+                let response = xhttp.responseText;
+                if (response != ""){
+                    window.location.href="http://localhost:8080/login.html";
+                }else {
+                    alert("Username or Email have all ready been taken");
+                }
+            }
         }
-
-        xhttp.open("POST", "http://localhost:8080/Project2WorkoutApp/users", true);
+        xhttp.open("POST", "http://localhost:8080/users", true);
 
         xhttp.setRequestHeader('Content-Type', 'application/json');
 
         xhttp.send(JSON.stringify(user));
-
-        window.location.href="http://localhost:8080/Project2WorkoutApp/src/main/workoutpages/login.html";
+    
+        
     }
 
 </script>

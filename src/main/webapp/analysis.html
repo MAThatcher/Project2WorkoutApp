@@ -8,6 +8,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="analysis.css">
     <title>Analysis Page</title>
+    
+    
+    <style>
+body {
+  background-image: url('https://images.unsplash.com/photo-1486218119243-13883505764c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80');
+      background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+html {
+    height: 100%
+}
+</style>
 </head>
 
 
@@ -63,7 +75,7 @@
         </tr>
       </thead>
       <tbody id="tb" class="tb">
-        
+
       </tbody>
     </table>
     
@@ -71,31 +83,6 @@
 
 <script>
 
-//const table = document.querySelector("#table > tbody")
-
-//grabs the goals_bodyweight information for a specific user
-// function loadWeight () {
-//         console.log("inside loadweight()");
-//         console.log("uid is: " + uid);
-//         const xhttp = new XMLHttpRequest();
-
-//         //goals bodyweight link here
-//         // xhttp.open("GET", `http://localhost:8080/workout/${uid}`, true);
-//         xhttp.open("GET", "http://localhost:8080/workout/12", true);
-
-//         xhttp.onload = () => {
-//             try {
-//                 const json = JSON.parse(xhttp.responseText);
-//                 populateTable(json);
-//             } catch (e) {
-//                 console.warn("Could not find any workouts");
-//             } 
-//         }
-
-//         xhttp.send();
-//     }
-
-//grabs workout info from ajax and populates table
 var user;
 function loadWeight() {
  

@@ -59,7 +59,7 @@
           <th scope="col">Duration</th>
           <th scope="col">Muscle Group</th>
           <th scope="col">Calories Burned</th>    
-          <th scope="col">User ID</th>
+          <th scope="col">User Name</th>
         </tr>
       </thead>
       <tbody id="tb" class="tb">
@@ -96,9 +96,10 @@
 //     }
 
 //grabs workout info from ajax and populates table
+var user;
 function loadWeight() {
-  console.log("inside loadWeight()");
-  console.log("uid: " + uid);
+ 
+  console.log(user);
 
   let xhttp = new XMLHttpRequest();
 
@@ -108,41 +109,66 @@ function loadWeight() {
     if(this.readyState == 2) console.log("rs: " + this.readyState);
     if(this.readyState == 3) console.log("rs: " + this.readyState);
 
+    var table = document.getElementById("table");
+    var rowCount = table.rows.length;
+   
+
     if(this.readyState == 4 && this.status == 200) {
+    	
       var workouts = JSON.parse(this.responseText);
-      console.log(typeof workouts);
-      console.log(workouts)
-      console.log(workouts.length);
-
+	  console.log(workouts);
+	  
       for(var i = 0; i < workouts.length; i++) {
-        var tr = document.createElement("tr");
-
-        var td1 = document.createElement("td");
-        td1.innerHTML = workouts[i].requestor;
-        var td2 = document.createElement("td");
-        td1.innerHTML = workouts[i].requestor;
-        var td3 = document.createElement("td");
-        td1.innerHTML = workouts[i].requestor;
-        var td4 = document.createElement("td");
-        td1.innerHTML = workouts[i].requestor;
-        var td5 = document.createElement("td");
-        td1.innerHTML = workouts[i].requestor;
-        var td6 = document.createElement("td");
-        td1.innerHTML = workouts[i].requestor;
-
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tr.appendChild(td3);
-        tr.appendChild(td4);
-        tr.appendChild(td5);
-        tr.appendChild(td6);
-
+ 		console.log(workouts[i]);
+ 		 var row = table.insertRow(rowCount);
+ 	    //Column 1
+ 	    var cell1 = row.insertCell(0);
+ 	    var element1 = document.createElement("input");
+ 	    element1.readOnly = true;
+ 	    element1.type = "text";
+ 	    element1.value = workouts[i].workout_id;
+ 	    cell1.appendChild(element1);
+ 	    //Column 2
+ 	    var cell2 = row.insertCell(1);
+ 	    var element2 = document.createElement("input");
+ 	    element2.type = "text";
+ 	    element2.readOnly = true;
+ 	    element2.value = workouts[i].name;
+ 	    cell2.appendChild(element2);
+ 	    //Column 3
+ 	    var cell3 = row.insertCell(2);
+ 	    var element3 = document.createElement("input");
+ 	    element3.readOnly = true;
+ 	    element3.type = "text";
+ 	    element3.value = workouts[i].duration;
+ 	    cell3.appendChild(element3);
+ 	    //Column 4
+ 	    var cell4 = row.insertCell(3);
+ 	    var element4 = document.createElement("input");
+ 	    element4.readOnly = true;
+ 	    element4.type = "text";
+ 	    element4.value = workouts[i].mGroup;
+ 	    cell4.appendChild(element4);
+ 	    //Column 5
+ 	    var cell5 = row.insertCell(4);
+ 	    var element5 = document.createElement("input");
+ 	    element5.readOnly = true;
+ 	    element5.type = "text";
+ 	    element5.value = workouts[i].calories;
+ 	    cell5.appendChild(element5);
+ 	    //Column 6
+ 	    var cell6 = row.insertCell(5);
+ 	    var element6 = document.createElement("input");
+ 	    element6.readOnly = true;
+ 	    element6.type = "text";
+ 	    element6.value = workouts[i].user.username;
+ 	    cell6.appendChild(element6);
       }
     }
 
   }
 
-  xhttp.open("GET", "http://localhost:8080/workout/26", true);
+  xhttp.open("GET", "http://localhost:8080/getUserWorkOut/" + user.userID, true);
   //xhttp.open("GET", `http://localhost:8080/getUserWorkOut/${uid}`, true);
 
   xhttp.send();
@@ -177,13 +203,13 @@ window.onload = function displayUser()
 	{
 		if(this.readyState == 4 && this.status == 200)
 		{
-				console.log(this.responseText);
+			console.log(this.responseText);
 				
-				let user = JSON.parse(this.responseText);
+			user = JSON.parse(this.responseText);
 
-				uid = user.userID;
-        console.log("readystate and status for display user is good");
-        console.log(uid);
+			uid = user.userID;
+        	console.log("readystate and status for display user is good");
+        	console.log(uid);
 
         loadWeight();
 		}

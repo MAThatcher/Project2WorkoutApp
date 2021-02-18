@@ -15,7 +15,6 @@
 
     <!--navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
       <div class="container-fluid">
         <a class="navbar-brand" href="http://localhost:8080/main.html">Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,10 +26,9 @@
           <form class="d-flex">
 
               <a class="navbar-brand" href="http://localhost:8080/information.html">Information</a>
+              <a class="navbar-brand" href="http://localhost:8080/editaccount.html">Edit Account</a>
               <a class="navbar-brand" href="http://localhost:8080/login.html">Logout</a>
-              
           </form>
-
         </div>
       </div>
     </nav>
@@ -71,29 +69,33 @@
 
 <script>
 
-//const table = document.querySelector("#table > tbody")
+//get userid from cookie and call loadWeight()
+window.onload = function displayUser()
+{
+	console.log("display user");
 
-//grabs the goals_bodyweight information for a specific user
-// function loadWeight () {
-//         console.log("inside loadweight()");
-//         console.log("uid is: " + uid);
-//         const xhttp = new XMLHttpRequest();
+	//Make an AJAX call
+	let xhttp = new XMLHttpRequest();
+	
+	xhttp.onreadystatechange = function()
+	{
+		if(this.readyState == 4 && this.status == 200)
+		{
+				console.log(this.responseText);
+				
+				let user = JSON.parse(this.responseText);
 
-//         //goals bodyweight link here
-//         // xhttp.open("GET", `http://localhost:8080/workout/${uid}`, true);
-//         xhttp.open("GET", "http://localhost:8080/workout/12", true);
+				uid = user.userID;
+        console.log("readystate and status for display user is good");
+        console.log(uid);
 
-//         xhttp.onload = () => {
-//             try {
-//                 const json = JSON.parse(xhttp.responseText);
-//                 populateTable(json);
-//             } catch (e) {
-//                 console.warn("Could not find any workouts");
-//             } 
-//         }
-
-//         xhttp.send();
-//     }
+        loadWeight();
+		}
+	}
+	
+	xhttp.open("GET", "http://localhost:8080/users/viewLoggedInUser", true);
+	xhttp.send();
+}
 
 //grabs workout info from ajax and populates table
 var user;
@@ -105,13 +107,13 @@ function loadWeight() {
 
   xhttp.onreadystatechange = function () {
 
+
     if(this.readyState == 1) console.log("rs: " + this.readyState);
     if(this.readyState == 2) console.log("rs: " + this.readyState);
     if(this.readyState == 3) console.log("rs: " + this.readyState);
 
     var table = document.getElementById("table");
     var rowCount = table.rows.length;
-   
 
     if(this.readyState == 4 && this.status == 200) {
     	
@@ -165,14 +167,14 @@ function loadWeight() {
  	    cell6.appendChild(element6);
       }
     }
-
-  }
+  } 
 
   xhttp.open("GET", "http://localhost:8080/getUserWorkOut/" + user.userID, true);
   //xhttp.open("GET", `http://localhost:8080/getUserWorkOut/${uid}`, true);
 
   xhttp.send();
 }
+
 
 //populates table with loadWeight resposneText
 // function populateTable(json) {
@@ -218,8 +220,6 @@ window.onload = function displayUser()
 	xhttp.open("GET", "http://localhost:8080/users/viewLoggedInUser", true);
 	xhttp.send();
 }
-
-
 
 </script>
 

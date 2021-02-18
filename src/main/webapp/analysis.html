@@ -57,6 +57,7 @@
           <th scope="col">Duration</th>
           <th scope="col">Muscle Group</th>
           <th scope="col">Calories Burned</th>    
+          <th scope="col">User Name</th>
         </tr>
       </thead>
       <tbody id="tb" class="tb">
@@ -97,64 +98,127 @@ window.onload = function displayUser()
 }
 
 //grabs workout info from ajax and populates table
+var user;
 function loadWeight() {
-  console.log("inside loadWeight()");
-  console.log("uid: " + uid);
+ 
+  console.log(user);
 
   let xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function () {
 
+
+    if(this.readyState == 1) console.log("rs: " + this.readyState);
+    if(this.readyState == 2) console.log("rs: " + this.readyState);
+    if(this.readyState == 3) console.log("rs: " + this.readyState);
+
+    var table = document.getElementById("table");
+    var rowCount = table.rows.length;
+
     if(this.readyState == 4 && this.status == 200) {
+    	
       var workouts = JSON.parse(this.responseText);
-      console.log("json that has been parsed:");
-      console.log(workouts)
-
-      //converting json object to array
-      var array = [];
-      for(var i in workouts) {
-        array.push([i, workouts[i]]);
-      }
-
-      //deleting user object from json
-      for(var i = 5; i < array.length; i+=6) {
-        console.log("inside for loop for deleting user object(s)");
-        array.splice(i, 1);
-      }
-
-      console.log("updated array");
-      console.log(array);
-
-      //populating table with necessary workout data
-      for(var i = 0; i < array.length; i++) {
-        console.log("inside populate");
-        var tr = document.createElement("tr");
-
-        var td1 = document.createElement("td");
-        console.log(array[i]);
-        td1.innerHTML = array[i];
-        var td2 = document.createElement("td");
-        td1.innerHTML = array[i];
-        var td3 = document.createElement("td");
-        td1.innerHTML = array[i];
-        var td4 = document.createElement("td");
-        td1.innerHTML = array[i];
-        var td5 = document.createElement("td");
-        td1.innerHTML = array[i];
-
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tr.appendChild(td3);
-        tr.appendChild(td4);
-        tr.appendChild(td5);
+	  console.log(workouts);
+	  
+      for(var i = 0; i < workouts.length; i++) {
+ 		console.log(workouts[i]);
+ 		 var row = table.insertRow(rowCount);
+ 	    //Column 1
+ 	    var cell1 = row.insertCell(0);
+ 	    var element1 = document.createElement("input");
+ 	    element1.readOnly = true;
+ 	    element1.type = "text";
+ 	    element1.value = workouts[i].workout_id;
+ 	    cell1.appendChild(element1);
+ 	    //Column 2
+ 	    var cell2 = row.insertCell(1);
+ 	    var element2 = document.createElement("input");
+ 	    element2.type = "text";
+ 	    element2.readOnly = true;
+ 	    element2.value = workouts[i].name;
+ 	    cell2.appendChild(element2);
+ 	    //Column 3
+ 	    var cell3 = row.insertCell(2);
+ 	    var element3 = document.createElement("input");
+ 	    element3.readOnly = true;
+ 	    element3.type = "text";
+ 	    element3.value = workouts[i].duration;
+ 	    cell3.appendChild(element3);
+ 	    //Column 4
+ 	    var cell4 = row.insertCell(3);
+ 	    var element4 = document.createElement("input");
+ 	    element4.readOnly = true;
+ 	    element4.type = "text";
+ 	    element4.value = workouts[i].mGroup;
+ 	    cell4.appendChild(element4);
+ 	    //Column 5
+ 	    var cell5 = row.insertCell(4);
+ 	    var element5 = document.createElement("input");
+ 	    element5.readOnly = true;
+ 	    element5.type = "text";
+ 	    element5.value = workouts[i].calories;
+ 	    cell5.appendChild(element5);
+ 	    //Column 6
+ 	    var cell6 = row.insertCell(5);
+ 	    var element6 = document.createElement("input");
+ 	    element6.readOnly = true;
+ 	    element6.type = "text";
+ 	    element6.value = workouts[i].user.username;
+ 	    cell6.appendChild(element6);
       }
     }
   } 
 
-  xhttp.open("GET", "http://localhost:8080/workout/26", true);
+  xhttp.open("GET", "http://localhost:8080/getUserWorkOut/" + user.userID, true);
   //xhttp.open("GET", `http://localhost:8080/getUserWorkOut/${uid}`, true);
 
   xhttp.send();
+}
+
+
+//populates table with loadWeight resposneText
+// function populateTable(json) {
+//         json.forEach((row) => {
+//             const tr = document.createElement("tr");
+
+//             row.forEach((cell) => {
+//                 const td = document.createElement("td");
+//                 td.textContent = cell;
+//                 tr.appendChild(td);
+//             });
+
+//             table.appendChild(tr);
+//         });
+//     }
+
+// document.addEventListener("DOMContentLoaded", () => { loadWeight(); })
+
+//get userid from cookie and call loadWeight()
+window.onload = function displayUser()
+{
+	console.log("display user");
+
+	//Make an AJAX call
+	let xhttp = new XMLHttpRequest();
+	
+	xhttp.onreadystatechange = function()
+	{
+		if(this.readyState == 4 && this.status == 200)
+		{
+			console.log(this.responseText);
+				
+			user = JSON.parse(this.responseText);
+
+			uid = user.userID;
+        	console.log("readystate and status for display user is good");
+        	console.log(uid);
+
+        loadWeight();
+		}
+	}
+	
+	xhttp.open("GET", "http://localhost:8080/users/viewLoggedInUser", true);
+	xhttp.send();
 }
 
 </script>

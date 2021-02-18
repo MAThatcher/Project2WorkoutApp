@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.beans.ExerciseReference;
 import com.revature.beans.User;
 import com.revature.beans.Workout;
 import com.revature.services.UserServiceImpl;
@@ -107,6 +108,17 @@ public class WorkoutController {
 		return false;
 	}
 	
+	@GetMapping(value = "/getUserWorkOut/{id}")
+	public List<Workout> getUserWorkOut(@PathVariable("id") int id) {
+		try {
+			return ws.getAllWorkoutsByUserId(id);
+		} catch (NoSuchElementException e) {
+			System.out.println("NoSuchElementException in ExerciseReferencesController.getExerciseReference");
+			// e.printStackTrace();
+		}
+		return null;
+	}
+
 	
 	
 	

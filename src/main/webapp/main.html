@@ -5,8 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquiry/3.3.1/jquiry.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="main.css">
     <title>Track Main Page</title>
@@ -16,7 +14,7 @@
   <!--navbar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="http//localhost:8080/Project2WorkoutApp/src/main/workoutpages/main.html">Home</a>
+          <a class="navbar-brand" href="http://localhost:8080/main.html">Home</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -57,12 +55,12 @@
           </div>
           <div class="col-sm">
             <img style="width:100%" src="https://images.unsplash.com/photo-1543286386-713bdd548da4?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8YW5hbHlzaXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60">
-            <a href="http://localhost:8080/Project2WorkoutApp/analysis.html" class="btn btn-outline-secondary" style="width: 100%">View Analysis</a>
+            <a href="http://localhost:8080/analysis.html" class="btn btn-outline-secondary" style="width: 100%">View Analysis</a>
 
           </div>
           <div class="col-sm">
             <img style="width:100%" src="https://images.unsplash.com/photo-1448387473223-5c37445527e7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZ3Jlc3N8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60">
-            <a href="http://localhost:8080/Project2WorkoutApp/progress.html" class="btn btn-outline-secondary" style="width: 100%">Edit/Log Progress</a>
+            <a href="http://localhost:8080/progress.html" class="btn btn-outline-secondary" style="width: 100%">Edit/Log Progress</a>
 
           </div>
         </div>
@@ -117,11 +115,11 @@
       </div>
     </div>
   </div>
+
  <script>
  
-function displayUser()
-{
-	console.log("displayer user");
+window.onload = function displayUser() {
+	console.log("inside displayUser()");
 
 	//Make an AJAX call
 	let xhttp = new XMLHttpRequest();
@@ -133,16 +131,15 @@ function displayUser()
 				console.log(this.responseText);
 				
 				let employee = JSON.parse(this.responseText);
-				console.log("displayer user");
-
-				document.getElementById("welcome").innerHTML = "Hi " + employee.fname;
+        console.log("user id is...");
+				console.log(employee.userID);
 		}
 	}
 	
 	xhttp.open("GET", "http://localhost:8080/users/viewLoggedInUser", true);
 	xhttp.send();
 }
-window.onload = displayUser;
+
 </script>
     
 </body>

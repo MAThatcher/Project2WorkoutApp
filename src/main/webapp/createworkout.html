@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquiry/3.3.1/jquiry.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="createworkout.css">
+    <title>Create Workout Page</title>
+</head>
+<body>
+
+    <!--navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="http://localhost:8080/main.html">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">   
+          </ul>
+          <form class="d-flex">
+
+              <a class="navbar-brand" href="http://localhost:8080/information.html">Information</a>
+              <a class="navbar-brand" href="http://localhost:8080/login.html">Logout</a>
+              
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <!--Welcome Message-->
+    <div class="welcome">
+        <div class="container-fluid padding">
+        <div class="row welcome text-center">
+            <div class="col-12">
+                <h1 class="display-4">Create a Workout</h1>
+            </div>
+            <hr>
+            <div class="col-12">
+                <p class="lead">Use this page to add from our database of exercises in order to create unique workouts that work for you!</p>
+            </div>
+        </div>
+        </div>
+        </div>
+
+    <div class="main">
+    <!--workout name input field-->  
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Workout Name</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Enter a name for your workout..." id="workoutName">
+    </div>
+
+    <!--added exercises table-->
+    <table class="table" id="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+
+            <th scope="col" id="exerciseColumn">Exercise</th>
+            <th scope="col" id="setColumn">Sets</th>
+            <th scope="col" id="repColumn">Reps</th>
+            <th scope="col" id="calorieColumn">Calories Burned</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+	  <p> 1. Select the theme of your Workout. </p>
+      <select class="form-select" aria-label="Default select example" id="workoutType">
+        <option selected value="0">Select Workout Type</option>
+        <option value="1">Arms</option>
+        <option value="2">Back</option>
+        <option value="3">Chest</option>
+        <option value="4">Legs</option>
+        <option value="5">Full body</option>
+        <option value="6">Upper body</option>
+        <option value="7">Lower body</option>
+
+      </select>
+      
+      <br></br>
+ 	  <p>2. Select the type of exercise</p>
+      <select class="form-select" aria-label="Default select example" id="exerciseType">
+        <option selected value="0">Select Exercise Type</option>
+        <option value="1">cardio</option>
+        <option value="2">calisthenics</option>
+        <option value="3">weightlifting</option>
+      </select>
+      
+		<br></br>
+    	<p>3. Select from the list of exercises we have provided based on your exercise type.</p>
+      <select class="form-select" aria-label="Default select example" id="exercises">
+      </select>
+      
+      <hr>
+
+      <div class="input-group mb-3">
+        <input type="number" class="form-control" placeholder="Sets" aria-label="Username" id="sets">
+        <span class="input-group-text">X</span>
+        <input type="number" class="form-control" placeholder="Reps" aria-label="Server" id="reps">
+      </div>
+      <hr>
+
+      <p>4. View your workout</p>
+      <select class="form-select" aria-label="Default select example" id="workouts">
+      </select>
+		<br></br>
+		
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <button class="btn btn-outline-secondary" onclick="addExercise()">Add Exercise</button> <br></br>
+          </div>               
+
+          <div class="col-sm">
+            <button class="btn btn-outline-secondary" onclick="addWorkout()">Create Workout</button>
+          </div>
+        </div>
+      </div>
+
+
+      
+
+    </div> <!--main wrapper-->
+
+    
+    
+</body>
+
+<script>
+
+document.getElementById("exerciseType").onchange = displayExercises;
+document.getElementById("workouts").onchange = displayWorkoutInfo;
+var listOfExercises = [];
+var listOfSets = [];
+var allExercises;
+var loggedInUser;
+var returnedExercise;
+ function addExercise() {
+	  
+		var x = document.getElementById("exercises");
+		var i = x.selectedIndex;
+		let exerciseId = x.options[i].value;
+		let exerciseName = x.options[i].text;
+		let exercise = 
+		{
+			id:exerciseId,
+			name: exerciseName
+		}
+    listOfExercises.push(exercise);
+	
+	var exerciseCalories;
+	for(var i = 0; i < allExercises.length; i++)
+	{
+		if(allExercises[i].name == exercise.name)
+		{
+			exerciseCalories = allExercises[i].calories;	
+		}
+	}
+	
+	var setElement = document.getElementById("sets");
+	var amountOfSets = setElement.value;
+	
+	var repElement = document.getElementById("reps");
+	var amountOfReps = repElement.value;
+	
+	var totalReps = amountOfReps * amountOfSets;
+	var totalCalories = totalReps * exerciseCalories;
+	let set = 
+	{
+		set_id: 0,
+		repetitions: amountOfReps,
+		total_calories: totalCalories,
+		amount_sets: amountOfSets,
+		exercise: exercise,
+		workout: null
+	}
+	listOfSets.push(set);
+	console.log(listOfSets);
+	
+	var sel = document.getElementById("workouts");
+	var opt = document.createElement('option');
+	opt.appendChild(document.createTextNode(exercise.name + " for " + set.amount_sets + " sets and " + set.repetitions + " repetitions"));
+	opt.value = listOfSets.length - 1;
+	sel.appendChild(opt);
+
+  clearInputs();
+
+  }
+
+  //clears out input fields and exercise choice
+  function clearInputs() {
+    document.getElementById('sets').value = '';
+    document.getElementById('reps').value = '';
+
+    document.getElementById('exerciseType').value="0";
+  }
+  function addWorkout() {
+    //no idea how this will be accomplished yet
+
+  }
+
+function displayWorkoutInfo()
+{
+	var exerciseColumn = document.getElementById("exerciseColumn");
+	var setColumn = document.getElementById("setColumn");
+	var repColumn = document.getElementById("repColumn");
+	var calorieColumn = document.getElementById("calorieColumn");
+
+
+	var x = document.getElementById("workouts");
+	var i = x.selectedIndex;
+	
+	exerciseColumn.innerHTML = "Exercise: " + listOfExercises[i].name;
+	setColumn.innerHTML = "Sets: " + listOfSets[i].amount_sets;
+	repColumn.innerHTML = "Reps: " + listOfSets[i].repetitions;
+	calorieColumn.innerHTML = "Calories Burned: " + listOfSets[i].total_calories;
+	
+}
+function displayExercises()
+  {
+	var stuff = document.getElementById('exercises');
+	while(stuff.options.length > 0)
+	{
+		stuff.remove(0);	
+	}
+	var exercises = document.getElementById("exerciseType");
+	var i = exercises.selectedIndex;
+	let type = exercises.options[i].text;
+	
+  	//Make an AJAX call
+  	let xhttp = new XMLHttpRequest();
+  	
+  	xhttp.onreadystatechange = function()
+  	{
+  		if(this.readyState == 4 && this.status == 200)
+  		{
+  				console.log(this.responseText);
+  				
+  				let exercises = JSON.parse(this.responseText);
+  				
+  				var sel = document.getElementById('exercises');
+  				for(var i = 0; i < exercises.length; i++)
+  				{
+  					var opt = document.createElement('option');
+  					opt.appendChild(document.createTextNode(exercises[i].name));
+  					opt.value = exercises[i].id;
+  					sel.appendChild(opt);
+  				}
+  		}
+  	}
+  	
+  	xhttp.open("GET", "http://localhost:8080/exerciseReferenceByType/" + type, true);
+  	xhttp.send();
+  }
+  
+function getAllExercises()
+{
+
+	//Make an AJAX call
+	let xhttp = new XMLHttpRequest();
+	
+	xhttp.onreadystatechange = function()
+	{
+		if(this.readyState == 4 && this.status == 200)
+		{
+				console.log("got exercises");
+				
+				allExercises = JSON.parse(this.responseText);
+				
+		}
+	}
+	
+	xhttp.open("GET", "http://localhost:8080/exerciseReference", true);
+	xhttp.send();
+}
+
+function addWorkout() {
+    var workoutTypeElement = document.getElementById("workoutType")
+    var i = workoutTypeElement.selectedIndex;
+    var workoutType = workoutTypeElement.options[i].text;
+    var workoutName = document.getElementById("workoutName").value;
+	var totalCalories = 0;
+	for(var i = 0; i < listOfSets.length; i++)
+	{
+		totalCalories = totalCalories + listOfSets[i].total_calories;
+	}
+	
+	let workout = {
+			workout_id: 0,
+			name: workoutName,
+			duration: 60,
+			mGroup: workoutType,
+			calories: totalCalories,
+			user: null
+	}
+	
+	let xhttp = new XMLHttpRequest();
+	
+	xhttp.onreadystatechange = function()
+	{
+		console.log(this.readyState);
+		if(this.readyState == 4 && this.status == 200)
+		{
+			returnedWorkOut = JSON.parse(this.responseText);
+			user = returnedWorkOut.user;
+			console.log(user);
+			addSets(returnedWorkOut);
+			alert("Workout Created. Proud of you.");
+		}
+	}
+	
+	xhttp.open("POST", "http://localhost:8080/workout", true);
+	
+	//Set a request header which will indicate to the server that the request body will be JSON
+	xhttp.setRequestHeader("Content-Type", "application/json");
+	
+	//Send, but now we will pass in the Request Body as a parameter of the function
+	xhttp.send(JSON.stringify(workout));
+  }
+ function addSets(returnedWorkOut)
+ {
+	 for(var i = 0; i < listOfSets.length; i++)
+	{
+		 let set = listOfSets[i];
+		 set.workout = returnedWorkOut;
+		 let xhttp = new XMLHttpRequest();
+		 
+		 xhttp.onreadystatechange = function()
+		 {
+			 console.log(this.readyState);
+			 if(this.readyState == 4 && this.status == 200)
+			{
+				 console.log(this.response);
+			}
+		 }
+		 
+		 xhttp.open("POST", "http://localhost:8080/sets", true);
+		 
+		 xhttp.setRequestHeader("Content-Type", "application/json");
+		 
+		 xhttp.send(JSON.stringify(set));
+	}
+ }
+window.onload = getAllExercises;
+
+</script>
+
+</html>

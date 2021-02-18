@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquiry/3.3.1/jquiry.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="createaccount.css">
+    <title>Create Account Page</title>
+</head>
+<body>
+
+    
+
+<div class="main">
+    <!--Welcome Message-->
+    <div class="welcome">
+        <div class="container-fluid padding">
+        <div class="row welcome text-center">
+            <div class="col-12">
+                <h1 class="display-4">Create a Track Account</h1>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>
+
+    <form>
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" class="form-control" id="fname">
+        </div>
+        <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" class="form-control" id="lname">
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email">
+        </div>
+        <p id="passwordMatch" style="color:red"></p>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password">
+        </div>
+        <div class="form-group">
+            <label for="password2">Confirm Password</label>
+            <input type="password" class="form-control" id="password2">
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="number" class="form-control" id="phone">
+        </div>
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" class="form-control" id="age">
+        </div>
+        <div class="form-group">
+            <label for="weight">Weight</label>
+            <input type="number" class="form-control" id="weight">
+        </div>
+        <div class="form-group">
+            <label for="goalweight">Goal Weight</label>
+            <input type="number" class="form-control" id="goalweight">
+        </div>
+        <div class="form-group">
+            <label for="height">Height in Inches</label>
+            <input type="number" class="form-control" id="height">
+        </div>
+        <div class="form-group">
+            <label for="time">Time you want to spend working out per week</label>
+            <input type="number" class="form-control" id="time">
+        </div>
+        <select name="menu" id="gender">
+            <option value="">--Choose your gender--</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+            <option value="3">Choose not to specify</option>
+        </select><br></br>
+
+        <button type="button" class="btn btn-outline-secondary" onclick="create()">Create Account</button>
+        <a class="btn btn-outline-secondary" href="http://localhost:8080/login.html">Back</a>
+    </form>  
+
+</div>
+    
+</body>
+
+<script>
+    document.getElementById("password").addEventListener("change", ()=>{
+        pw1 = document.getElementById("password").value;
+        pw2 = document.getElementById("password2").value;
+        if (pw1 != pw2){
+            document.getElementById("passwordMatch").innerHTML="Passwords do not match"
+        }else{
+            document.getElementById("passwordMatch").innerHTML=""
+        }
+    })
+    document.getElementById("password2").addEventListener("change", ()=>{
+        pw1 = document.getElementById("password").value;
+        pw2 = document.getElementById("password2").value;
+        if (pw1 != pw2){
+            document.getElementById("passwordMatch").innerHTML="Passwords do not match"
+        }else{
+            document.getElementById("passwordMatch").innerHTML=""
+        }
+    })
+    //AJAX POST to add new user
+    function create() { 
+
+        let fname=document.getElementById("fname").value;
+        let lname=document.getElementById("lname").value;
+        let username=document.getElementById("username").value;
+        let password=document.getElementById("password").value;
+        let password2=document.getElementById("password2").value;
+        let email=document.getElementById("email").value;
+        let phoneNo=document.getElementById("phone").value;
+        let gender=document.getElementById("gender").value;
+        let age=document.getElementById("age").value;
+        let weight=document.getElementById("weight").value;
+        let goalWeight=document.getElementById("goalweight").value;
+        let height=document.getElementById("height").value;
+        let time=document.getElementById("time").value;
+
+        if (password != password2){
+            console.log("Passwords dont match");
+            alert("Passwords do not match");
+            return;
+        }
+
+        let user= {
+            fname,
+            lname,
+            username,
+            password,
+            email,
+            phNumber: phoneNo,
+            gender,
+            age,
+            weight,
+            goalWeight,
+            height,
+            time
+        }
+
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = () => {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                
+                let response = xhttp.responseText;
+                if (response != ""){
+                    window.location.href="http://localhost:8080/login.html";
+                }else {
+                    alert("Username or Email have all ready been taken");
+                }
+            }
+        }
+        xhttp.open("POST", "http://localhost:8080/users", true);
+
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+
+        xhttp.send(JSON.stringify(user));
+    
+        
+    }
+
+</script>
+
+</html>

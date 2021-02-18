@@ -83,9 +83,7 @@ public class UserController {
 		Cookie[] cookies = request.getCookies();
 		String cookieId = cookies[0].getValue();
 		int id = Integer.parseInt(cookieId);
-		System.out.println(id);
 		User loggedInUser = us.findUserByID(id);
-		System.out.println(loggedInUser.toString());
 		return loggedInUser;
 	}
 	

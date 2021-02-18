@@ -100,7 +100,6 @@ public class UserController {
 			e.printStackTrace();
 		}
 		return null;
-
 	}
 
 	// Logout

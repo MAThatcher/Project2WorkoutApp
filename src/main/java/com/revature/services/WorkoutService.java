@@ -12,5 +12,5 @@ public interface WorkoutService {
 	public List<Workout> getAllWorkouts();
 	public Workout updateWorkout(Workout change);
 	public boolean deleteWorkout(int id);
-	
+	public List<Workout> getAllWorkoutsByUserId(int id);
 }

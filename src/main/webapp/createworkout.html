@@ -148,6 +148,7 @@ var listOfExercises = [];
 var listOfSets = [];
 var allExercises;
 var loggedInUser;
+var returnedExercise;
  function addExercise() {
 	  
 		var x = document.getElementById("exercises");
@@ -184,7 +185,8 @@ var loggedInUser;
 		repetitions: amountOfReps,
 		total_calories: totalCalories,
 		amount_sets: amountOfSets,
-		exercise: exercise
+		exercise: exercise,
+		workout: null
 	}
 	listOfSets.push(set);
 	console.log(listOfSets);
@@ -313,9 +315,10 @@ function addWorkout() {
 		console.log(this.readyState);
 		if(this.readyState == 4 && this.status == 200)
 		{
-			var returnedWorkOut = JSON.parse(this.responseText);
+			returnedWorkOut = JSON.parse(this.responseText);
 			user = returnedWorkOut.user;
 			console.log(user);
+			addSets(returnedWorkOut);
 			alert("Workout Created. Proud of you.");
 		}
 	}
@@ -328,9 +331,29 @@ function addWorkout() {
 	//Send, but now we will pass in the Request Body as a parameter of the function
 	xhttp.send(JSON.stringify(workout));
   }
- function addSets()
+ function addSets(returnedWorkOut)
  {
-	 
+	 for(var i = 0; i < listOfSets.length; i++)
+	{
+		 let set = listOfSets[i];
+		 set.workout = returnedWorkOut;
+		 let xhttp = new XMLHttpRequest();
+		 
+		 xhttp.onreadystatechange = function()
+		 {
+			 console.log(this.readyState);
+			 if(this.readyState == 4 && this.status == 200)
+			{
+				 console.log(this.response);
+			}
+		 }
+		 
+		 xhttp.open("POST", "http://localhost:8080/sets", true);
+		 
+		 xhttp.setRequestHeader("Content-Type", "application/json");
+		 
+		 xhttp.send(JSON.stringify(set));
+	}
  }
 window.onload = getAllExercises;
 

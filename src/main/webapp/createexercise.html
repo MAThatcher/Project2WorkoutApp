@@ -50,47 +50,108 @@
     <div class="main">
 
     <div class="input-group mb-3">
-        <span class="input-group-text" id="inputGroup-sizing-default">Exercise Name</span>
+        <span class="input-group-text" id="exName">Exercise Name</span>
         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Enter a name for your exercise..." id="workoutName">
     </div>
 
     <br>
 
       <select class="form-select" aria-label="Default select example" id="workoutTheme">
-        <option selected value="0">Select Workout Theme</option>
-        <option value="1">Arms</option>
-        <option value="2">Back</option>
-        <option value="3">Chest</option>
-        <option value="4">Legs</option>
-        <option value="5">Full body</option>
-        <option value="6">Upper body</option>
-        <option value="7">Lower body</option>
+        <option selected value="0">Select Target Muscle</option>
+        <option value="1">arms</option>
+        <option value="2">back</option>
+        <option value="3">chest</option>
+        <option value="4">legs</option>
+        <option value="5">full body</option>
+        <option value="6">upper body</option>
+        <option value="7">lower body</option>
     </select>
 
     <br></br>
 
     <select class="form-select" aria-label="Default select example" id="workoutType">
-        <option selected value="0">Select Workout Type</option>
-        <option value="1">Calisthenics</option>
-        <option value="2">Weightlifting</option>
-        <option value="3">Cardio</option>
+        <option selected value="0">Select Exercise Type</option>
+        <option value="1">calisthenics</option>
+        <option value="2">weightlifting</option>
+        <option value="3">cardio</option>
     </select>
 
     <br></br>
 
     <select class="form-select" aria-label="Default select example" id="workoutDifficulty">
-        <option selected value="0">Select Workout Difficulty</option>
-        <option value="1">Easy</option>
-        <option value="2">Medium</option>
-        <option value="3">Hard</option>
+        <option selected value="0">Select Difficulty</option>
+        <option value="1">easy</option>
+        <option value="2">medium</option>
+        <option value="3">hard</option>
     </select>
 
+	<br></br>
+	  <input type="number" class="form-control" placeholder="Calories burned per repetition" aria-label="Username" id="reps">
     <br></br>
 
-    <button class="btn btn-outline-secondary" onclick="addWorkout()">Create Exercise</button>
+    <button class="btn btn-outline-secondary" onclick="addExercise()">Create Exercise</button>
 
     </div>
 
     
 </body>
+<script>
+function addExercise()
+{
+	var exerciseName = document.getElementById("workoutName").value;	
+	
+	//Select target Muscle
+    var selectTargetMuscle = document.getElementById("workoutTheme")
+    var i = selectTargetMuscle.selectedIndex;
+    var targetMuscle = selectTargetMuscle.options[i].text;
+    
+    //Select exercise type
+    var exerciseTypeElement = document.getElementById("workoutType");
+    var a = exerciseTypeElement.selectedIndex;
+    var exerciseType = exerciseTypeElement.options[a].text;
+    
+    //Select difficulty
+   var difficultyElement = document.getElementById("workoutDifficulty");
+   var b = difficultyElement.selectedIndex;
+   var difficulty = difficultyElement.options[b].text;
+   
+   //Select calories
+	var repElement = document.getElementById("reps");
+	var calories = repElement.value;
+	
+	console.log("Name: " + exerciseName + " Muscle: " + targetMuscle + " Type: " + exerciseType + " Difficulty: " + difficulty + " Calories: " + calories);
+	
+	let exerciseReference =
+	{
+		type: exerciseType,
+		name: exerciseName,
+		mGroup: targetMuscle,
+		difficulty: difficulty,
+		calories: calories,
+		unit: "one"
+	}
+		
+	let xhttp = new XMLHttpRequest();
+	
+	xhttp.onreadystatechange = function()
+	{
+		console.log(this.readyState);
+		if(this.readyState == 4 && this.status == 200)
+		{
+			alert("Exercise Created. Proud of you.");
+		}
+	}
+	
+	xhttp.open("POST", "http://localhost:8080/exerciseReference", true);
+	
+	//Set a request header which will indicate to the server that the request body will be JSON
+	xhttp.setRequestHeader("Content-Type", "application/json");
+	
+	//Send, but now we will pass in the Request Body as a parameter of the function
+	xhttp.send(JSON.stringify(exerciseReference));
+}
+
+
+
+</script>
 </html>

@@ -8,8 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.context.annotation.Scope;
+
 @Entity
 @Table(name = "USERS")
+//@Scope("session")
 public class User {
 	
 	//Fields

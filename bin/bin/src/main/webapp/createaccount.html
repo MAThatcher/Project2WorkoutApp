@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquiry/3.3.1/jquiry.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="createaccount.css">
+    <title>Create Account Page</title>
+</head>
+<body>
+
+    
+
+<div class="main">
+    <!--Welcome Message-->
+    <div class="welcome">
+        <div class="container-fluid padding">
+        <div class="row welcome text-center">
+            <div class="col-12">
+                <h1 class="display-4">Create a Track Account</h1>
+            </div>
+            <hr>
+        </div>
+        </div>
+        </div>
+
+    <form>
+        <div class="form-group">
+          <label for="exampleInputPassword1">First Name</label>
+          <input type="text" class="form-control" id="fname">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Last Name</label>
+            <input type="text" class="form-control" id="lname">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Username</label>
+            <input type="text" class="form-control" id="username">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Email</label>
+            <input type="text" class="form-control" id="email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Phone Number</label>
+            <input type="number" class="form-control" id="phone">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Age</label>
+            <input type="number" class="form-control" id="age">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Weight</label>
+            <input type="number" class="form-control" id="weight">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Goal Weight</label>
+            <input type="number" class="form-control" id="goalweight">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Height in Inches</label>
+            <input type="number" class="form-control" id="height">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Time you want to spend working out per week</label>
+            <input type="number" class="form-control" id="time">
+        </div>
+        <select name="menu" id="type select">
+            <option value="">--Choose your gender--</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+            <option value="3">Choose not to specify</option>
+        </select><br></br>
+
+        <button type="button" class="btn btn-outline-secondary" onclick="create()">Create Account</button>
+    </form>  
+
+</div>
+    
+</body>
+
+<script>
+
+    //AJAX POST to add new user
+    function create() { 
+
+        let fname=document.getElementById("fname").value;
+        let lname=document.getElementById("lname").value;
+        let username=document.getElementById("username").value;
+        let password=document.getElementById("password").value;
+        let email=document.getElementById("email").value;
+        let phoneNo=document.getElementById("phoneNo").value;
+        let gender=document.getElementById("gender").value;
+        let age=document.getElementById("age").value;
+        let weight=document.getElementById("weight").value;
+        let goalWeight=document.getElementById("goalWeight").value;
+        let height=document.getElementById("height").value;
+        let time=document.getElementById("time").value;
+
+        let user= {
+            user_fname: fname,
+            user_lname: lname,
+            user_username: username,
+            user_password: password,
+            user_email: email,
+            user_phone_number: phoneNo,
+            user_gender: gender,
+            user_age: age,
+            user_weight: weight,
+            user_goal_weight: goalWeight,
+            user_height: height,
+            user_time: time
+        }
+
+        let xhttp = new XMLHttpRequest();
+
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+        }
+
+        xhttp.open("POST", "http://localhost:8080/Project2WorkoutApp/users", true);
+
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+
+        xhttp.send(JSON.stringify(user));
+
+        window.location.href="http://localhost:8080/Project2WorkoutApp/src/main/workoutpages/login.html";
+    }
+
+</script>
+
+</html>

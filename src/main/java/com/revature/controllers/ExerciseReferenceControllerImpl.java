@@ -67,7 +67,7 @@ public class ExerciseReferenceControllerImpl implements ExerciseReferenceControl
 		return null;
 	}
 
-	@DeleteMapping(value = "/exerciseReference/{id}")
+	@DeleteMapping(value = "/exerciseReferenceDelete/{id}")
 	public boolean deleteExerciseReference(@PathVariable("id") int id) {
 		try {
 			return ers.deleteExerciseReference(id);
@@ -83,6 +83,17 @@ public class ExerciseReferenceControllerImpl implements ExerciseReferenceControl
 	public List<ExerciseReference> getAllExerciseReferencesByType(@PathVariable("type") String type) {
 		try {
 			return ers.getAllExerciseReferencesByType(type);
+		} catch (NoSuchElementException e) {
+			System.out.println("NoSuchElementException in ExerciseReferencesController.getAllExerciseReferences");
+			// e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@GetMapping(value = "/exerciseReferenceByUnit/{unit}", produces = "application/json")
+	public List<ExerciseReference> getAllCustomExercises(@PathVariable("unit") String unit) {
+		try {
+			return ers.getAllCustomExercises(unit);
 		} catch (NoSuchElementException e) {
 			System.out.println("NoSuchElementException in ExerciseReferencesController.getAllExerciseReferences");
 			// e.printStackTrace();

@@ -89,13 +89,94 @@
 	  <input type="number" class="form-control" placeholder="Calories burned per repetition" aria-label="Username" id="reps">
     <br></br>
 
-    <button class="btn btn-outline-secondary" onclick="addExercise()">Create Exercise</button>
+    
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+           <button class="btn btn-outline-secondary" onclick="addExercise()">Create Exercise</button>
+          </div>               
+        </div>
+      </div>
 
     </div>
-
+    <!--Welcome Message-->
+    <div class="welcome">
+        <div class="container-fluid padding">
+        <div class="row welcome text-center">
+            <div class="col-12">
+                <h1 class="display-4">Edit An Existing Custom Exercise!</h1>
+            </div>
+            <hr>
+            <div class="col-12">
+                <p class="lead">Here you are able to view and edit your exercises.</p>
+            </div>
+        </div>
+        </div>
+        </div>
+     <div class="main">
+    	<br></br>
+    	<p>View custom exercises</p>
+      <select class="form-select" aria-label="Default select example" id="exercises">
+      </select>
+      
+      	<br></br>
+      	<p>Name: </p>
+	  <input type="text" class="form-control" placeholder="Exercise name" aria-label="Username" id="custName">
+    <br></br>
     
+     <p>Muscle group: </p>
+    <select class="form-select" aria-label="Default select example" id="customTheme">
+        <option selected value="0">Select Target Muscle</option>
+        <option value="1">arms</option>
+        <option value="2">back</option>
+        <option value="3">chest</option>
+        <option value="4">legs</option>
+        <option value="5">full body</option>
+        <option value="6">upper body</option>
+        <option value="7">lower body</option>
+    </select>
+    
+     <br></br>
+    <p>Type: </p>
+    <select class="form-select" aria-label="Default select example" id="customType">
+        <option selected value="0">Select Exercise Type</option>
+        <option value="1">calisthenics</option>
+        <option value="2">weightlifting</option>
+        <option value="3">cardio</option>
+    </select>
+
+    <br></br>
+    <p>Difficulty: </p>
+    <select class="form-select" aria-label="Default select example" id="customDifficulty">
+        <option selected value="0">Select Difficulty</option>
+        <option value="1">easy</option>
+        <option value="2">medium</option>
+        <option value="3">hard</option>
+    </select>
+    
+    
+    <br></br>
+      <p>Calories: </p>
+	  <input type="number" class="form-control" placeholder="Calories burned per repetition" aria-label="Username" id="customCalories">
+    <br></br>
+    
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <button class="btn btn-outline-secondary" onclick="updateExercise()">Update Exercise</button> <br></br>
+          </div>               
+
+          <div class="col-sm">
+            <button class="btn btn-outline-secondary" onclick="deleteExercise()">Delete Exercise</button>
+          </div>
+        </div>
+      </div>
+   </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"> </script>
 <script>
+var exercises;
 function addExercise()
 {
 	var exerciseName = document.getElementById("workoutName").value;	
@@ -128,7 +209,7 @@ function addExercise()
 		mGroup: targetMuscle,
 		difficulty: difficulty,
 		calories: calories,
-		unit: "one"
+		unit: "custom"
 	}
 		
 	let xhttp = new XMLHttpRequest();
@@ -139,6 +220,7 @@ function addExercise()
 		if(this.readyState == 4 && this.status == 200)
 		{
 			alert("Exercise Created. Proud of you.");
+			location.reload();
 		}
 	}
 	
@@ -151,7 +233,186 @@ function addExercise()
 	xhttp.send(JSON.stringify(exerciseReference));
 }
 
+function displayExercises()
+{
+	var stuff = document.getElementById('exercises');
+	while(stuff.options.length > 0)
+	{
+		stuff.remove(0);	
+	}
+	
+	//Make an AJAX call
+	let xhttp = new XMLHttpRequest();
+	
+	xhttp.onreadystatechange = function()
+	{
+		if(this.readyState == 4 && this.status == 200)
+		{
+				console.log(this.responseText);
+				
+				exercises = JSON.parse(this.responseText);
+				
+				var sel = document.getElementById('exercises');
+				for(var i = 0; i < exercises.length; i++)
+				{
+					var opt = document.createElement('option');
+					opt.appendChild(document.createTextNode(exercises[i].name));
+					opt.value = exercises[i].id;
+					sel.appendChild(opt);
+					
+				}
+				
+		}
+	}
+	
+	xhttp.open("GET", "http://localhost:8080/exerciseReferenceByUnit/" + "custom", true);
+	xhttp.send();
+}
 
+function viewExerciseInfo()
+{
+    var customExercises = document.getElementById("exercises")
+    var i = customExercises.selectedIndex;
+	document.getElementById("custName").value = exercises[i].name;
 
+	if(exercises[i].mGroup == "arms")
+	{
+		$("#customTheme").val(1);
+	}
+	if(exercises[i].mGroup == "back")
+	{
+		$("#customTheme").val(2);
+	}
+	if(exercises[i].mGroup == "chest")
+	{
+		$("#customTheme").val(3);
+	}
+	if(exercises[i].mGroup == "legs")
+	{
+		$("#customTheme").val(4);
+	}
+	if(exercises[i].mGroup == "full body")
+	{
+		$("#customTheme").val(5);
+	}
+	if(exercises[i].mGroup == "upper body")
+	{
+		$("#customTheme").val(6);
+	}
+	if(exercises[i].mGroup == "lower body")
+	{
+		$("#customTheme").val(7);
+	}
+	
+	
+	if(exercises[i].type == "cardio")
+	{
+		$("#customType").val(1);
+	}
+	if(exercises[i].type == "calisthenics")
+	{
+		$("#customType").val(2);
+	}
+	if(exercises[i].type == "weightlifting")
+	{
+		$("#customType").val(3);
+	}
+	
+	
+	if(exercises[i].difficulty == "easy")
+	{
+		$("#customDifficulty").val(1);
+	}
+	if(exercises[i].difficulty == "medium")
+	{
+		$("#customDifficulty").val(2);
+	}
+	if(exercises[i].difficulty == "hard")
+	{
+		$("#customDifficulty").val(3);
+	}
+
+	customCalories = document.getElementById("customCalories");
+	customCalories.value = exercises[i].calories;
+}
+
+function updateExercise()
+{
+    var customExercises = document.getElementById("exercises")
+    var i = customExercises.selectedIndex;
+    var exercise = exercises[i];
+    console.log(exercise);
+	exercise.name = document.getElementById("custName").value;	
+	
+	//Select target Muscle
+    var selectTargetMuscle = document.getElementById("customTheme")
+    var i = selectTargetMuscle.selectedIndex;
+    exercise.mGroup = selectTargetMuscle.options[i].text;
+    
+    //Select exercise type
+    var exerciseTypeElement = document.getElementById("customType");
+    var a = exerciseTypeElement.selectedIndex;
+    exercises.type = exerciseTypeElement.options[a].text;
+    
+    //Select difficulty
+   var difficultyElement = document.getElementById("customDifficulty");
+   var b = difficultyElement.selectedIndex;
+   exercises.difficulty = difficultyElement.options[b].text;
+   
+   //Select calories
+	var repElement = document.getElementById("customCalories");
+	exercises.calories = repElement.value;
+	
+	console.log(exercise);
+	
+
+	let xhttp = new XMLHttpRequest();
+	
+	xhttp.onreadystatechange = function()
+	{
+		console.log(this.readyState);
+		if(this.readyState == 4 && this.status == 200)
+		{
+			alert("Exercise Updated. Proud of you.");
+			location.reload();
+		}
+	}
+	
+	xhttp.open("PUT", "http://localhost:8080/exerciseReference/" + exercise.id, true);
+	
+	//Set a request header which will indicate to the server that the request body will be JSON
+	xhttp.setRequestHeader("Content-Type", "application/json");
+	
+	//Send, but now we will pass in the Request Body as a parameter of the function
+	xhttp.send(JSON.stringify(exercise));
+}
+
+function deleteExercise()
+{
+    var customExercises = document.getElementById("exercises")
+    var i = customExercises.selectedIndex;
+    var exercise = exercises[i];
+    console.log("reached");
+	//Make an AJAX Call
+	let xhttp = new XMLHttpRequest();
+	
+	xhttp.onreadystatechange = function()
+	{
+		console.log(this.readyState);
+		if(this.readyState == 4 && this.status == 200)
+		{
+			alert("Exercise Deleted. Not Proud of you.");
+			location.reload();
+		}
+	}
+	xhttp.open("DELETE", "http://localhost:8080/exerciseReferenceDelete/" + exercise.id, true);
+	//Set a request header which will indicate to the server that the request body will be JSON
+	xhttp.setRequestHeader("Content-Type", "application/json");
+	
+	//Send, but now we will pass in the Request Body as a parameter of the function
+	xhttp.send(JSON.stringify(exercise));
+}
+document.getElementById("exercises").onchange = viewExerciseInfo;
+window.onload = displayExercises;
 </script>
 </html>

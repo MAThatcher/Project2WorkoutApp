@@ -63,5 +63,21 @@ public class ExerciseReferenceServiceImpl implements ExerciseReferenceService{
 		}
 		return allExercisesOfType;
 	}
+	public List<ExerciseReference> getAllCustomExercises(String unit)
+	{
+		List<ExerciseReference> allExercises = (List<ExerciseReference>) err.findAll();
+		List<ExerciseReference> allCustomExercises = new ArrayList<ExerciseReference>();
+		
+		//If exercise in the list of all exercises match the type provided in the string "type"
+		//Add it to the new list of exercises
+		for(ExerciseReference exercise : allExercises)
+		{
+			if(exercise.getUnit().equals(unit))
+			{
+				allCustomExercises.add(exercise);
+			}
+		}
+		return allCustomExercises;
+	}
 	
 }

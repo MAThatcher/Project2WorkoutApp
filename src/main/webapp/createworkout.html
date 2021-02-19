@@ -88,7 +88,7 @@
         <option value="5">Full body</option>
         <option value="6">Upper body</option>
         <option value="7">Lower body</option>
-
+		<option value="8">Cardio</option>
       </select>
       
       <br></br>
@@ -320,6 +320,7 @@ function addWorkout() {
 			console.log(user);
 			addSets(returnedWorkOut);
 			alert("Workout Created. Proud of you.");
+			location.reload();
 		}
 	}
 	

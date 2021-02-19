@@ -11,5 +11,5 @@ public interface ExerciseReferenceService {
 	public ExerciseReference updateExerciseReference(ExerciseReference er);
 	public boolean deleteExerciseReference(int id);
 	public List<ExerciseReference> getAllExerciseReferencesByType(String type);
-
+	public List<ExerciseReference> getAllCustomExercises(String unit);
 }

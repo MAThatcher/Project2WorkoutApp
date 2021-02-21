@@ -29,10 +29,10 @@ public class WorkoutController {
 	
 	@Autowired
 	WorkoutService ws;
-	//WorkoutServiceImpl ws;
+//	WorkoutServiceImpl ws;
 	@Autowired
 	UserService us;
-	//UserServiceImpl us;
+//	UserServiceImpl us;
 	
 	@GetMapping(value = "/workout/{id}")
 	public Workout getWorkout(@PathVariable("id") int id) {

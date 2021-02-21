@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.User;
 import com.revature.beans.Workout;
+import com.revature.services.UserService;
 import com.revature.services.UserServiceImpl;
+import com.revature.services.WorkoutService;
 import com.revature.services.WorkoutServiceImpl;
 
 @RestController
@@ -26,9 +28,11 @@ import com.revature.services.WorkoutServiceImpl;
 public class WorkoutController {
 	
 	@Autowired
-	WorkoutServiceImpl ws;
+	WorkoutService ws;
+	//WorkoutServiceImpl ws;
 	@Autowired
-	UserServiceImpl us;
+	UserService us;
+	//UserServiceImpl us;
 	
 	@GetMapping(value = "/workout/{id}")
 	public Workout getWorkout(@PathVariable("id") int id) {

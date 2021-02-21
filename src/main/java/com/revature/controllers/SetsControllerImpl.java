@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Sets;
+import com.revature.services.SetsService;
 import com.revature.services.SetsServiceImpl;
 
 @RestController
@@ -21,7 +22,8 @@ import com.revature.services.SetsServiceImpl;
 public class SetsControllerImpl implements SetsController {
 
 	@Autowired
-	SetsServiceImpl ss;
+	SetsService ss;
+	//SetsServiceImpl ss;
 
 	@GetMapping(value = "/sets/{id}")
 	public Sets getSet(@PathVariable("id") int id) {

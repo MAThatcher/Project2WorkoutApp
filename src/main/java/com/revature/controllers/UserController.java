@@ -114,7 +114,9 @@ public class UserController {
 	@PostMapping(value = "/users", consumes = "application/json", produces = "application/json")
 	public @ResponseBody User addUser(@RequestBody User user) {
 		try {
-
+//			System.out.println(user);
+//			User testUser = us.addUser(user);
+//			System.out.println(testUser);
 			return us.addUser(user);
 		} catch (Exception e) {
 			System.out.println("Exception in UserController.addUser Likely duplicate value in unique column");

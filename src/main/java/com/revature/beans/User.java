@@ -222,6 +222,93 @@ public class User {
 				+ ", age=" + age + ", weight=" + weight + ", goalWeight=" + goalWeight + ", height=" + height
 				+ ", time=" + time + "]";
 	}
+
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + age;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((fname == null) ? 0 : fname.hashCode());
+		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+		result = prime * result + goalWeight;
+		result = prime * result + height;
+		result = prime * result + ((lname == null) ? 0 : lname.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((phNumber == null) ? 0 : phNumber.hashCode());
+		result = prime * result + ((time == null) ? 0 : time.hashCode());
+		result = prime * result + userID;
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + weight;
+		return result;
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (age != other.age)
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (fname == null) {
+			if (other.fname != null)
+				return false;
+		} else if (!fname.equals(other.fname))
+			return false;
+		if (gender == null) {
+			if (other.gender != null)
+				return false;
+		} else if (!gender.equals(other.gender))
+			return false;
+		if (goalWeight != other.goalWeight)
+			return false;
+		if (height != other.height)
+			return false;
+		if (lname == null) {
+			if (other.lname != null)
+				return false;
+		} else if (!lname.equals(other.lname))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (phNumber == null) {
+			if (other.phNumber != null)
+				return false;
+		} else if (!phNumber.equals(other.phNumber))
+			return false;
+		if (time == null) {
+			if (other.time != null)
+				return false;
+		} else if (!time.equals(other.time))
+			return false;
+		if (userID != other.userID)
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		if (weight != other.weight)
+			return false;
+		return true;
+	}
+	
 	
 	
 }

@@ -105,4 +105,52 @@ public class Workout {
 				+ ", calories=" + calories + ", user=" + user + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + calories;
+		result = prime * result + duration;
+		result = prime * result + ((mGroup == null) ? 0 : mGroup.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + workout_id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Workout other = (Workout) obj;
+		if (calories != other.calories)
+			return false;
+		if (duration != other.duration)
+			return false;
+		if (mGroup == null) {
+			if (other.mGroup != null)
+				return false;
+		} else if (!mGroup.equals(other.mGroup))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		if (workout_id != other.workout_id)
+			return false;
+		return true;
+	}
+	
+	
+
 }

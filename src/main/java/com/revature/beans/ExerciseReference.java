@@ -114,4 +114,61 @@ public class ExerciseReference {
 				+ ", difficulty=" + difficulty + ", calories=" + calories + ", unit=" + unit + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + calories;
+		result = prime * result + ((difficulty == null) ? 0 : difficulty.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((mGroup == null) ? 0 : mGroup.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((unit == null) ? 0 : unit.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ExerciseReference other = (ExerciseReference) obj;
+		if (calories != other.calories)
+			return false;
+		if (difficulty == null) {
+			if (other.difficulty != null)
+				return false;
+		} else if (!difficulty.equals(other.difficulty))
+			return false;
+		if (id != other.id)
+			return false;
+		if (mGroup == null) {
+			if (other.mGroup != null)
+				return false;
+		} else if (!mGroup.equals(other.mGroup))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		if (unit == null) {
+			if (other.unit != null)
+				return false;
+		} else if (!unit.equals(other.unit))
+			return false;
+		return true;
+	}
+	
+	
+
 }

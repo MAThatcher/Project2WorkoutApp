@@ -81,7 +81,41 @@ public class GoalsBodyWeight {
 		return "GoalsBodyweight [bodyweight_id=" + bodyweight_id + ", current_weight=" + current_weight
 				+ ", goal_weight=" + goal_weight + ", user=" + user + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + bodyweight_id;
+		result = prime * result + current_weight;
+		result = prime * result + goal_weight;
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GoalsBodyWeight other = (GoalsBodyWeight) obj;
+		if (bodyweight_id != other.bodyweight_id)
+			return false;
+		if (current_weight != other.current_weight)
+			return false;
+		if (goal_weight != other.goal_weight)
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
 	
-	
+		
 	
 }

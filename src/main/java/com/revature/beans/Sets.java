@@ -110,8 +110,49 @@ public class Sets {
 				+ ", amount_sets=" + amount_sets + ", exercise=" + exercise + ", workout=" + workout + "]";
 	}
 
-    
-	
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + amount_sets;
+		result = prime * result + ((exercise == null) ? 0 : exercise.hashCode());
+		result = prime * result + repetitions;
+		result = prime * result + set_id;
+		result = prime * result + total_calories;
+		result = prime * result + ((workout == null) ? 0 : workout.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sets other = (Sets) obj;
+		if (amount_sets != other.amount_sets)
+			return false;
+		if (exercise == null) {
+			if (other.exercise != null)
+				return false;
+		} else if (!exercise.equals(other.exercise))
+			return false;
+		if (repetitions != other.repetitions)
+			return false;
+		if (set_id != other.set_id)
+			return false;
+		if (total_calories != other.total_calories)
+			return false;
+		if (workout == null) {
+			if (other.workout != null)
+				return false;
+		} else if (!workout.equals(other.workout))
+			return false;
+		return true;
+	}
 	
 }

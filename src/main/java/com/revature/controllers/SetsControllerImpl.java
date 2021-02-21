@@ -23,7 +23,7 @@ public class SetsControllerImpl implements SetsController {
 
 	@Autowired
 	SetsService ss;
-	//SetsServiceImpl ss;
+//	SetsServiceImpl ss;
 
 	@GetMapping(value = "/sets/{id}")
 	public Sets getSet(@PathVariable("id") int id) {

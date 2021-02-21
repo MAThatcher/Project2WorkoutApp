@@ -22,7 +22,7 @@
 			<groupId>com.oracle.ojdbc</groupId>
 			<artifactId>ojdbc8</artifactId>
 		</dependency>
-		
+
 		<!-- Added -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -43,30 +43,44 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<!--  <scope>test</scope> -->
+			<!-- <scope>test</scope> -->
 		</dependency>
-		
-		
-		
-		
-	<!--  	
-	    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>5.6.0</version>
-      <scope>test</scope>
-    </dependency>
-		
-		    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-junit-jupiter</artifactId>
-      <version>3.2.4</version>
-      <scope>test</scope>
-    </dependency>
-    -->
-		
-		
-		
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.8.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-firefox-driver -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-firefox-driver</artifactId>
+			<version>3.141.59</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/info.cukes/cucumber-junit -->
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>1.2.4</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/info.cukes/cucumber-java -->
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>1.2.4</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- <dependency> <groupId>org.junit.jupiter</groupId> <artifactId>junit-jupiter</artifactId> 
+			<version>5.6.0</version> <scope>test</scope> </dependency> <dependency> <groupId>org.mockito</groupId> 
+			<artifactId>mockito-junit-jupiter</artifactId> <version>3.2.4</version> <scope>test</scope> 
+			</dependency> -->
+
+
+
 	</dependencies>
 
 	<build>

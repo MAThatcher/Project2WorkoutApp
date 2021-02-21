@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.beans.ExerciseReference;
 import com.revature.beans.User;
 import com.revature.beans.Workout;
 import com.revature.services.UserServiceImpl;

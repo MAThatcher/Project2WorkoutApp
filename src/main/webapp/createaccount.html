@@ -95,8 +95,8 @@
 
 <script>
     document.getElementById("password").addEventListener("change", ()=>{
-        pw1 = document.getElementById("password").value;
-        pw2 = document.getElementById("password2").value;
+        const pw1 = document.getElementById("password").value;
+        const pw2 = document.getElementById("password2").value;
         if (pw1 != pw2){
             document.getElementById("passwordMatch").innerHTML="Passwords do not match"
         }else{
@@ -104,8 +104,8 @@
         }
     })
     document.getElementById("password2").addEventListener("change", ()=>{
-        pw1 = document.getElementById("password").value;
-        pw2 = document.getElementById("password2").value;
+        const pw1 = document.getElementById("password").value;
+        const pw2 = document.getElementById("password2").value;
         if (pw1 != pw2){
             document.getElementById("passwordMatch").innerHTML="Passwords do not match"
         }else{

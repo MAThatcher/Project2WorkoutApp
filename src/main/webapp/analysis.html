@@ -101,55 +101,55 @@ function loadWeight() {
    
 
     if(this.readyState == 4 && this.status == 200) {
-    	
+        
       var workouts = JSON.parse(this.responseText);
-	  console.log(workouts);
-	  
+      console.log(workouts);
+      
       for(var i = 0; i < workouts.length; i++) {
- 		console.log(workouts[i]);
- 		 var row = table.insertRow(rowCount);
- 	    //Column 1
- 	    var cell1 = row.insertCell(0);
- 	    var element1 = document.createElement("input");
- 	    element1.readOnly = true;
- 	    element1.type = "text";
- 	    element1.value = workouts[i].workout_id;
- 	    cell1.appendChild(element1);
- 	    //Column 2
- 	    var cell2 = row.insertCell(1);
- 	    var element2 = document.createElement("input");
- 	    element2.type = "text";
- 	    element2.readOnly = true;
- 	    element2.value = workouts[i].name;
- 	    cell2.appendChild(element2);
- 	    //Column 3
- 	    var cell3 = row.insertCell(2);
- 	    var element3 = document.createElement("input");
- 	    element3.readOnly = true;
- 	    element3.type = "text";
- 	    element3.value = workouts[i].duration;
- 	    cell3.appendChild(element3);
- 	    //Column 4
- 	    var cell4 = row.insertCell(3);
- 	    var element4 = document.createElement("input");
- 	    element4.readOnly = true;
- 	    element4.type = "text";
- 	    element4.value = workouts[i].mGroup;
- 	    cell4.appendChild(element4);
- 	    //Column 5
- 	    var cell5 = row.insertCell(4);
- 	    var element5 = document.createElement("input");
- 	    element5.readOnly = true;
- 	    element5.type = "text";
- 	    element5.value = workouts[i].calories;
- 	    cell5.appendChild(element5);
- 	    //Column 6
- 	    var cell6 = row.insertCell(5);
- 	    var element6 = document.createElement("input");
- 	    element6.readOnly = true;
- 	    element6.type = "text";
- 	    element6.value = workouts[i].user.username;
- 	    cell6.appendChild(element6);
+        console.log(workouts[i]);
+         var row = table.insertRow(rowCount);
+        //Column 1
+        var cell1 = row.insertCell(0);
+        var element1 = document.createElement("input");
+        element1.readOnly = true;
+        element1.type = "text";
+        element1.value = workouts[i].workout_id;
+        cell1.appendChild(element1);
+        //Column 2
+        var cell2 = row.insertCell(1);
+        var element2 = document.createElement("input");
+        element2.type = "text";
+        element2.readOnly = true;
+        element2.value = workouts[i].name;
+        cell2.appendChild(element2);
+        //Column 3
+        var cell3 = row.insertCell(2);
+        var element3 = document.createElement("input");
+        element3.readOnly = true;
+        element3.type = "text";
+        element3.value = workouts[i].duration;
+        cell3.appendChild(element3);
+        //Column 4
+        var cell4 = row.insertCell(3);
+        var element4 = document.createElement("input");
+        element4.readOnly = true;
+        element4.type = "text";
+        element4.value = workouts[i].mGroup;
+        cell4.appendChild(element4);
+        //Column 5
+        var cell5 = row.insertCell(4);
+        var element5 = document.createElement("input");
+        element5.readOnly = true;
+        element5.type = "text";
+        element5.value = workouts[i].calories;
+        cell5.appendChild(element5);
+        //Column 6
+        var cell6 = row.insertCell(5);
+        var element6 = document.createElement("input");
+        element6.readOnly = true;
+        element6.type = "text";
+        element6.value = workouts[i].user.username;
+        cell6.appendChild(element6);
       }
     }
 
@@ -181,29 +181,29 @@ function loadWeight() {
 //get userid from cookie and call loadWeight()
 window.onload = function displayUser()
 {
-	console.log("display user");
+    console.log("display user");
 
-	//Make an AJAX call
-	let xhttp = new XMLHttpRequest();
-	
-	xhttp.onreadystatechange = function()
-	{
-		if(this.readyState == 4 && this.status == 200)
-		{
-			console.log(this.responseText);
-				
-			user = JSON.parse(this.responseText);
+    //Make an AJAX call
+    let xhttp = new XMLHttpRequest();
+    
+    xhttp.onreadystatechange = function()
+    {
+        if(this.readyState == 4 && this.status == 200)
+        {
+            console.log(this.responseText);
+                
+            user = JSON.parse(this.responseText);
 
-			uid = user.userID;
-        	console.log("readystate and status for display user is good");
-        	console.log(uid);
+            let uid = user.userID;
+            console.log("readystate and status for display user is good");
+            console.log(uid);
 
         loadWeight();
-		}
-	}
-	
-	xhttp.open("GET", "http://localhost:8080/users/viewLoggedInUser", true);
-	xhttp.send();
+        }
+    }
+    
+    xhttp.open("GET", "http://localhost:8080/users/viewLoggedInUser", true);
+    xhttp.send();
 }
 
 

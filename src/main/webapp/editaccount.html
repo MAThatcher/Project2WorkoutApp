@@ -113,16 +113,16 @@
 <script>
 
 window.onload = function getUser() {
-	console.log("inside getUser()");
+  console.log("inside getUser()");
 
-	//Make an AJAX call
-	let xhttp = new XMLHttpRequest();
-	
-	xhttp.onreadystatechange = function()
-	{
-		if(this.readyState == 4 && this.status == 200)
-		{				
-				let employee = JSON.parse(this.responseText);
+  //Make an AJAX call
+  let xhttp = new XMLHttpRequest();
+  
+  xhttp.onreadystatechange = function()
+  {
+    if(this.readyState == 4 && this.status == 200)
+    {       
+        let employee = JSON.parse(this.responseText);
                 document.getElementById("fname").value = employee.fname;
                 document.getElementById("lname").value = employee.lname;
                 document.getElementById("username").value = employee.username;
@@ -149,15 +149,15 @@ window.onload = function getUser() {
                 document.getElementById("height").value = employee.height;
                 document.getElementById("time").value = employee.time;
                 document.getElementById("id").value = employee.userID
-		}
-	}
-	
-	xhttp.open("GET", "http://localhost:8080/users/viewLoggedInUser", true);
-	xhttp.send();
+    }
+  }
+  
+  xhttp.open("GET", "http://localhost:8080/users/viewLoggedInUser", true);
+  xhttp.send();
 }
 document.getElementById("password").addEventListener("change", ()=>{
-    pw1 = document.getElementById("password").value;
-    pw2 = document.getElementById("password2").value;
+    let pw1 = document.getElementById("password").value;
+    let pw2 = document.getElementById("password2").value;
     if (pw1 != pw2){
         document.getElementById("passwordMatch").innerHTML="Passwords do not match"
     }else{
@@ -165,8 +165,8 @@ document.getElementById("password").addEventListener("change", ()=>{
     }
 })
 document.getElementById("password2").addEventListener("change", ()=>{
-    pw1 = document.getElementById("password").value;
-    pw2 = document.getElementById("password2").value;
+    let pw1 = document.getElementById("password").value;
+    let pw2 = document.getElementById("password2").value;
     if (pw1 != pw2){
         document.getElementById("passwordMatch").innerHTML="Passwords do not match"
     }else{

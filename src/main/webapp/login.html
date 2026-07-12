@@ -43,33 +43,33 @@
     
     //sets and sends cookies to other pages
     function login() {
-    	let username = document.getElementById("email").value;
-    	let password = document.getElementById("password").value;
-    	//Make an AJAX call
-    	let xhttp = new XMLHttpRequest();
-    	
-    	xhttp.onreadystatechange = function()
-    	{
-    		if(this.readyState == 4 && this.status == 200)
-    		{
-    				console.log(this.responseText);
-    				
-    				let employee = JSON.parse(this.responseText);
-    				
-    				if(employee == null)
-    				{
-    					let information = "Incorrect Username or password";
-    					document.getElementById("result").innerHTML = information;
-    				} 
-    				else
-    				{
-    					window.location.href = "http://localhost:8080/main.html";
-    				}
-    		}
-    	}
-    	
-    	xhttp.open("GET", "http://localhost:8080/users/securelogin?username=" + username + "&password=" + password, true);
-    	xhttp.send();
+      const username = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      //Make an AJAX call
+      let xhttp = new XMLHttpRequest();
+      
+      xhttp.onreadystatechange = function()
+      {
+        if(this.readyState == 4 && this.status == 200)
+        {
+            console.log(this.responseText);
+            
+            const employee = JSON.parse(this.responseText);
+            
+            if(employee == null)
+            {
+              const information = "Incorrect Username or password";
+              document.getElementById("result").innerHTML = information;
+            } 
+            else
+            {
+              window.location.href = "http://localhost:8080/main.html";
+            }
+        }
+      }
+      
+      xhttp.open("GET", "http://localhost:8080/users/securelogin?username=" + username + "&password=" + password, true);
+      xhttp.send();
     }
 
 </script>
